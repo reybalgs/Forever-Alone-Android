@@ -24,7 +24,6 @@ public class Splash extends Activity {
              * and close this Splash-Screen after some seconds.*/
 
             new Handler().postDelayed(new Runnable(){
-                    @Override
                     public void run() {
                             /* Create an Intent that will start the Menu-Activity. */
                             Intent mainIntent = new Intent(Splash.this,Menu.class);
