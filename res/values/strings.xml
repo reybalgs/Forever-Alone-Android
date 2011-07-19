@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Hello World, HelloTabWidgetActivity!</string>
+    <string name="app_name">Forever Alone</string>
+    <string name="version">0.3b</string>
+    <string name="trollinfo">The trollface is an iconic figure of trolling. Many an Internet user has been trolled and raged by this face.</string>
+    <string-array name="SCHED">
+    	<item>CCSCAL2</item>
+    	<item>INTRODB</item>
+    	<item>DIGIDES</item>
+    	<item>HCIFACE</item>
+    	<item>TREDTWO</item>
+    	<item>BALIWAN</item>
+    </string-array>
+    <string-array name="FRIENDS">
+    	<item>John McDerp</item>
+    	<item>Nyan Cat</item>
+    	<item>Pedobear</item>
+    	<item>Lugkhast</item>
+    	<item>Heavy Weapons Guy</item>
+    	<item>GLaDoS</item>
+    	<item>Wheatley</item>
+    	<item>Tiny Baby Man</item>
+    	<item>CREDIT TO TEAM!</item>
+    </string-array>
+    <string-array name="color_schemes">
+    	<item>Android Default</item>
+    	<item>Fedora BLU</item>
+    	<item>Red Hat RED</item>
+    </string-array>
+</resources>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="Look and Feel">
+        <ListPreference android:summary="Paint this app in many colors!" android:entries="@array/color_schemes" android:title="Color scheme" android:entryValues="@array/color_schemes" android:enabled="true"></ListPreference>
+        <CheckBoxPreference android:defaultValue="0" android:title="Additional Shininess" android:summary="Moar shiny? No problem!" android:enabled="true"></CheckBoxPreference>
+    </PreferenceCategory><PreferenceCategory android:title="Privacy">
+        <CheckBoxPreference android:title="Make my schedules public" android:summary="Derp derp" android:defaultValue="0" android:enabled="true"></CheckBoxPreference>
+        
+    </PreferenceCategory>
+    <PreferenceCategory android:title="Stealing Information">
+        <EditTextPreference android:dialogTitle="Your name" android:title="Your name" android:summary="We're gonna need it probably" android:dialogMessage="Put your name here lol."></EditTextPreference>
+        <PreferenceScreen android:summary="Perhaps you should read this..." android:title="Privacy Policy">
+            <PreferenceScreen android:widgetLayout="@layout/privacypolicy" android:layout="@layout/privacypolicy"></PreferenceScreen>
+        </PreferenceScreen>
+        <Preference android:title="Version" android:summary="@string/version"></Preference>
+    </PreferenceCategory>
+    
+</PreferenceScreen>
