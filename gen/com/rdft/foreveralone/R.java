@@ -31,7 +31,6 @@ public final class R {
         public static final int your_friends_iconselect=0x7f02000c;
     }
     public static final class id {
-        public static final int button1=0x7f080003;
         public static final int settings_text_view=0x7f080000;
         public static final int splashscreen=0x7f080001;
         public static final int you=0x7f080002;
