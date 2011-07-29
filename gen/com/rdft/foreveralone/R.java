@@ -31,18 +31,22 @@ public final class R {
         public static final int your_friends_iconselect=0x7f02000c;
     }
     public static final class id {
-        public static final int settings_text_view=0x7f080000;
-        public static final int splashscreen=0x7f080001;
-        public static final int you=0x7f080002;
+        public static final int popText1=0x7f080005;
+        public static final int settings_text_view=0x7f080001;
+        public static final int splashscreen=0x7f080002;
+        public static final int textView1=0x7f080000;
+        public static final int you=0x7f080003;
+        public static final int youpopup=0x7f080004;
     }
     public static final class layout {
-        public static final int friends=0x7f030000;
-        public static final int main=0x7f030001;
-        public static final int privacypolicy=0x7f030002;
-        public static final int showsettingslayout=0x7f030003;
-        public static final int splash=0x7f030004;
-        public static final int you=0x7f030005;
-        public static final int you_popup_layout=0x7f030006;
+        public static final int course=0x7f030000;
+        public static final int friends=0x7f030001;
+        public static final int main=0x7f030002;
+        public static final int privacypolicy=0x7f030003;
+        public static final int showsettingslayout=0x7f030004;
+        public static final int splash=0x7f030005;
+        public static final int you=0x7f030006;
+        public static final int you_popup_layout=0x7f030007;
     }
     public static final class raw {
         public static final int ohmy=0x7f050000;

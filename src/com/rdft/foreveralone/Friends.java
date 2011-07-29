@@ -16,5 +16,9 @@ public class Friends extends ListActivity {
 
         ListView lv = getListView();
         lv.setTextFilterEnabled(true);
+        
+        /* When a friend's name is pressed, show various details about that
+         * 	friend.
+         */
 	}
 }
