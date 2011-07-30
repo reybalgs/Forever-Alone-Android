@@ -23,20 +23,20 @@ public class Menu extends TabActivity {
         intent = new Intent().setClass(this, You.class);
 
         // Initialize a TabSpec for each tab and add it to the TabHost
-        spec = tabHost.newTabSpec("you").setIndicator("You",
+        spec = tabHost.newTabSpec("you").setIndicator("",
                       res.getDrawable(R.drawable.ic_tab_you))
                       .setContent(intent);
         tabHost.addTab(spec);
 
         // Do the same for the other tabs
         intent = new Intent().setClass(this, Friends.class);
-       spec = tabHost.newTabSpec("friends").setIndicator("Friends",
+       spec = tabHost.newTabSpec("friends").setIndicator("",
                           res.getDrawable(R.drawable.ic_tab_friends))
                       .setContent(intent);
         tabHost.addTab(spec);
 
         intent = new Intent().setClass(this, Settings.class);
-        spec = tabHost.newTabSpec("settings").setIndicator("Settings",
+        spec = tabHost.newTabSpec("settings").setIndicator("",
                           res.getDrawable(R.drawable.ic_tab_settings))
                       .setContent(intent);
         tabHost.addTab(spec);

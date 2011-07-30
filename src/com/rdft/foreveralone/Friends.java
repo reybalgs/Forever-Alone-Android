@@ -2,6 +2,8 @@ package com.rdft.foreveralone;
 
 import android.app.ListActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import com.rdft.foreveralone.R;
@@ -20,5 +22,13 @@ public class Friends extends ListActivity {
         /* When a friend's name is pressed, show various details about that
          * 	friend.
          */
+        
+	}
+	// For the options menu
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuInflater inflater = getMenuInflater();
+	    inflater.inflate(R.menu.friendsoptionsmenu, menu);
+	    return true;
 	}
 }

@@ -20,21 +20,35 @@ public final class R {
         public static final int foreveralonesplash=0x7f020001;
         public static final int gear_settings_icon=0x7f020002;
         public static final int gear_settings_iconselect=0x7f020003;
-        public static final int ic_tab_friends=0x7f020004;
-        public static final int ic_tab_settings=0x7f020005;
-        public static final int ic_tab_you=0x7f020006;
-        public static final int icon=0x7f020007;
-        public static final int troll=0x7f020008;
-        public static final int you_icon=0x7f020009;
-        public static final int you_iconselect=0x7f02000a;
-        public static final int your_friends_icon=0x7f02000b;
-        public static final int your_friends_iconselect=0x7f02000c;
+        public static final int ic_menu_add=0x7f020004;
+        public static final int ic_menu_allfriends=0x7f020005;
+        public static final int ic_menu_cc=0x7f020006;
+        public static final int ic_menu_close_clear_cancel=0x7f020007;
+        public static final int ic_menu_edit=0x7f020008;
+        public static final int ic_menu_friendslist=0x7f020009;
+        public static final int ic_menu_home=0x7f02000a;
+        public static final int ic_menu_invite=0x7f02000b;
+        public static final int ic_menu_preferences=0x7f02000c;
+        public static final int ic_menu_refresh=0x7f02000d;
+        public static final int ic_tab_friends=0x7f02000e;
+        public static final int ic_tab_settings=0x7f02000f;
+        public static final int ic_tab_you=0x7f020010;
+        public static final int icon=0x7f020011;
+        public static final int troll=0x7f020012;
+        public static final int you_icon=0x7f020013;
+        public static final int you_iconselect=0x7f020014;
+        public static final int your_friends_icon=0x7f020015;
+        public static final int your_friends_iconselect=0x7f020016;
     }
     public static final class id {
-        public static final int edityouicon=0x7f090006;
-        public static final int exityouicon=0x7f090008;
+        public static final int addfriendicon=0x7f090006;
+        public static final int editfriendsicon=0x7f090007;
+        public static final int edityouicon=0x7f09000a;
+        public static final int exityouicon=0x7f09000c;
+        public static final int friendsexit=0x7f090009;
+        public static final int friendsrefresh=0x7f090008;
         public static final int popText1=0x7f090005;
-        public static final int refreshyouicon=0x7f090007;
+        public static final int refreshyouicon=0x7f09000b;
         public static final int settings_text_view=0x7f090001;
         public static final int splashscreen=0x7f090002;
         public static final int textView1=0x7f090000;
@@ -52,7 +66,8 @@ public final class R {
         public static final int you_popup_layout=0x7f030007;
     }
     public static final class menu {
-        public static final int youoptionsmenu=0x7f080000;
+        public static final int friendsoptionsmenu=0x7f080000;
+        public static final int youoptionsmenu=0x7f080001;
     }
     public static final class raw {
         public static final int ohmy=0x7f050000;
