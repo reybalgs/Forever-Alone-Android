@@ -2,25 +2,26 @@ package com.rdft.foreveralone;
 
 import com.rdft.foreveralone.R;
 
-import android.app.AlertDialog;
-import android.app.Dialog;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 import android.view.*;
-import android.view.ContextMenu.ContextMenuInfo;
+import android.view.Menu;
+import android.view.MenuItem;
 
 public class You extends ListActivity {
+	/* Some variables for the options menu
+	private int addButtonID = Menu.FIRST;
+	private int sortButtonID = Menu.FIRST + 1;
+	private int exitButtonID = Menu.FIRST + 2;
+	private int group1ID = 1;
+	*/
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,33 +90,49 @@ public class You extends ListActivity {
   		
         
 	}
+	/*
 	@Override
 	public void onCreateContextMenu(ContextMenu menu, View v,
 	                                ContextMenuInfo menuInfo) {
 	  super.onCreateContextMenu(menu, v, menuInfo);
 	  MenuInflater inflater = getMenuInflater();
-	  inflater.inflate(R.layout.course, menu);
+	  inflater.inflate(R.menu.youoptionsmenu, menu);
 	}
-	
+	*/
+	/*
+	@Override
 	protected Dialog onCreateDialog(int id) {
 	    Dialog dialog = null;
-	    final int DIALOG_PAUSED_ID = 0;
-	    final int DIALOG_GAMEOVER_ID = 1;
-	    
-	    switch(id) {
-	    case DIALOG_PAUSED_ID:
-	        // do the work to define the pause Dialog
-	    	
-	        break;
-	    case DIALOG_GAMEOVER_ID:
-	        // do the work to define the game over Dialog
-	        break;
-	    default:
-	        dialog = null;
-	        
-	    }
-	    showDialog(DIALOG_PAUSED_ID);
+	    // Reserved area for dialogs
 	    return dialog;
+	}
+	*/
+	// For the options menu
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuInflater inflater = getMenuInflater();
+	    inflater.inflate(R.menu.youoptionsmenu, menu);
+	    return true;
+	}
+	
+	// For the butons in the options menu
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		/* This function will handle the tapped icons in the options
+		 * menu.
+		 */
+		switch(item.getItemId()) {
+		case R.id.edityouicon:
+			Toast.makeText(this, "Edit icon selected", Toast.LENGTH_LONG).show();
+			break;
+		case R.id.refreshyouicon:
+			Toast.makeText(this, "Refreshing...", Toast.LENGTH_LONG).show();
+			break;
+		case R.id.exityouicon:
+			finish();
+			break;
+		}
+		return super.onOptionsItemSelected(item);
 	}
 }
 
