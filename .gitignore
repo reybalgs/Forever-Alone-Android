@@ -1,4 +1,5 @@
-bin/
+bin/*
+gen/*
 *.apk
 *.dex
 *.ap_
