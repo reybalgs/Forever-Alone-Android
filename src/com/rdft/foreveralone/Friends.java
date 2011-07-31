@@ -4,13 +4,15 @@ import android.app.ListActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
+
 import com.rdft.foreveralone.R;
 
 public class Friends extends ListActivity {
 	@Override
-	/* Trololololo */
 	public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         String[] friends = getResources().getStringArray(R.array.FRIENDS);
@@ -30,5 +32,27 @@ public class Friends extends ListActivity {
 		MenuInflater inflater = getMenuInflater();
 	    inflater.inflate(R.menu.friendsoptionsmenu, menu);
 	    return true;
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		/* This function will handle the tapped icons in the options
+		 * menu.
+		 */
+		switch(item.getItemId()) {
+		case R.id.addfriendicon:
+			Toast.makeText(this, "Add friend selected", Toast.LENGTH_LONG).show();
+			break;
+		case R.id.editfriendsicon:
+			Toast.makeText(this, "Edit friends selected", Toast.LENGTH_LONG).show();
+			break;
+		case R.id.friendsrefresh:
+			Toast.makeText(this, "Refreshing...", Toast.LENGTH_LONG).show();
+			break;
+		case R.id.friendsexit:
+			finish();
+			break;
+		}
+		return super.onOptionsItemSelected(item);
 	}
 }

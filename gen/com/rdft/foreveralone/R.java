@@ -41,29 +41,33 @@ public final class R {
         public static final int your_friends_iconselect=0x7f020016;
     }
     public static final class id {
-        public static final int addfriendicon=0x7f090006;
-        public static final int editfriendsicon=0x7f090007;
-        public static final int edityouicon=0x7f09000a;
-        public static final int exityouicon=0x7f09000c;
-        public static final int friendsexit=0x7f090009;
-        public static final int friendsrefresh=0x7f090008;
-        public static final int popText1=0x7f090005;
-        public static final int refreshyouicon=0x7f09000b;
-        public static final int settings_text_view=0x7f090001;
-        public static final int splashscreen=0x7f090002;
+        public static final int addfriendicon=0x7f090008;
+        public static final int editfriendsicon=0x7f090009;
+        public static final int edityouicon=0x7f09000c;
+        public static final int exityouicon=0x7f09000e;
+        public static final int friendsexit=0x7f09000b;
+        public static final int friendsrefresh=0x7f09000a;
+        public static final int header=0x7f090001;
+        public static final int list_item_section_text=0x7f090007;
+        public static final int popText1=0x7f090006;
+        public static final int refreshyouicon=0x7f09000d;
+        public static final int settings_text_view=0x7f090002;
+        public static final int splashscreen=0x7f090003;
         public static final int textView1=0x7f090000;
-        public static final int you=0x7f090003;
-        public static final int youpopup=0x7f090004;
+        public static final int you=0x7f090004;
+        public static final int youpopup=0x7f090005;
     }
     public static final class layout {
         public static final int course=0x7f030000;
         public static final int friends=0x7f030001;
-        public static final int main=0x7f030002;
-        public static final int privacypolicy=0x7f030003;
-        public static final int showsettingslayout=0x7f030004;
-        public static final int splash=0x7f030005;
-        public static final int you=0x7f030006;
-        public static final int you_popup_layout=0x7f030007;
+        public static final int friendsheader=0x7f030002;
+        public static final int main=0x7f030003;
+        public static final int privacypolicy=0x7f030004;
+        public static final int showsettingslayout=0x7f030005;
+        public static final int splash=0x7f030006;
+        public static final int you=0x7f030007;
+        public static final int you_popup_layout=0x7f030008;
+        public static final int youheader=0x7f030009;
     }
     public static final class menu {
         public static final int friendsoptionsmenu=0x7f080000;
