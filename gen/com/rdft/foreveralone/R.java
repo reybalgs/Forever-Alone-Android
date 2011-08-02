@@ -35,39 +35,59 @@ public final class R {
         public static final int ic_tab_you=0x7f020010;
         public static final int icon=0x7f020011;
         public static final int troll=0x7f020012;
-        public static final int you_icon=0x7f020013;
-        public static final int you_iconselect=0x7f020014;
-        public static final int your_friends_icon=0x7f020015;
-        public static final int your_friends_iconselect=0x7f020016;
+        public static final int yaosmall=0x7f020013;
+        public static final int you_icon=0x7f020014;
+        public static final int you_iconselect=0x7f020015;
+        public static final int your_friends_icon=0x7f020016;
+        public static final int your_friends_iconselect=0x7f020017;
     }
     public static final class id {
-        public static final int addfriendicon=0x7f090008;
-        public static final int editfriendsicon=0x7f090009;
-        public static final int edityouicon=0x7f09000c;
-        public static final int exityouicon=0x7f09000e;
-        public static final int friendsexit=0x7f09000b;
-        public static final int friendsrefresh=0x7f09000a;
-        public static final int header=0x7f090001;
-        public static final int list_item_section_text=0x7f090007;
-        public static final int popText1=0x7f090006;
-        public static final int refreshyouicon=0x7f09000d;
-        public static final int settings_text_view=0x7f090002;
-        public static final int splashscreen=0x7f090003;
-        public static final int textView1=0x7f090000;
-        public static final int you=0x7f090004;
-        public static final int youpopup=0x7f090005;
+        public static final int addfriendicon=0x7f090017;
+        public static final int addyouicon=0x7f09001b;
+        public static final int bottomtext=0x7f090016;
+        public static final int coursecode_digiderp=0x7f090006;
+        public static final int coursenametext=0x7f090000;
+        public static final int days_digiderp=0x7f090008;
+        public static final int description_digiderp=0x7f09000c;
+        public static final int descriptionstart_digiderp=0x7f09000b;
+        public static final int editText1=0x7f090001;
+        public static final int editText2=0x7f090003;
+        public static final int editfriendsicon=0x7f090018;
+        public static final int edityouicon=0x7f09001c;
+        public static final int exityouicon=0x7f09001e;
+        public static final int friendsexit=0x7f09001a;
+        public static final int friendsrefresh=0x7f090019;
+        public static final int header=0x7f09000d;
+        public static final int icon=0x7f090014;
+        public static final int instructor_digiderp=0x7f09000a;
+        public static final int list_item_section_text=0x7f090013;
+        public static final int popText1=0x7f090012;
+        public static final int refreshyouicon=0x7f09001d;
+        public static final int section_digiderp=0x7f090007;
+        public static final int settings_text_view=0x7f09000e;
+        public static final int splashscreen=0x7f09000f;
+        public static final int textView1=0x7f090004;
+        public static final int textView2=0x7f090002;
+        public static final int time_digiderp=0x7f090009;
+        public static final int title_digiderp=0x7f090005;
+        public static final int toptext=0x7f090015;
+        public static final int you=0x7f090010;
+        public static final int youpopup=0x7f090011;
     }
     public static final class layout {
-        public static final int course=0x7f030000;
-        public static final int friends=0x7f030001;
-        public static final int friendsheader=0x7f030002;
-        public static final int main=0x7f030003;
-        public static final int privacypolicy=0x7f030004;
-        public static final int showsettingslayout=0x7f030005;
-        public static final int splash=0x7f030006;
-        public static final int you=0x7f030007;
-        public static final int you_popup_layout=0x7f030008;
-        public static final int youheader=0x7f030009;
+        public static final int addfriend=0x7f030000;
+        public static final int course=0x7f030001;
+        public static final int digiderp_details=0x7f030002;
+        public static final int friends=0x7f030003;
+        public static final int friendsheader=0x7f030004;
+        public static final int main=0x7f030005;
+        public static final int privacypolicy=0x7f030006;
+        public static final int showsettingslayout=0x7f030007;
+        public static final int splash=0x7f030008;
+        public static final int you=0x7f030009;
+        public static final int you_popup_layout=0x7f03000a;
+        public static final int youheader=0x7f03000b;
+        public static final int yourow=0x7f03000c;
     }
     public static final class menu {
         public static final int friendsoptionsmenu=0x7f080000;
@@ -83,6 +103,8 @@ public final class R {
         public static final int version=0x7f060002;
     }
     public static final class xml {
-        public static final int settings=0x7f040000;
+        public static final int fake_friends=0x7f040000;
+        public static final int fake_you=0x7f040001;
+        public static final int settings=0x7f040002;
     }
 }

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:orientation="vertical"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent">
+  <TextView 
+  	android:text="Details about DIGIDERP" 
+  	android:id="@+id/title_digiderp"
+  	android:layout_width="wrap_content" 
+  	android:layout_height="wrap_content"
+  	android:layout_marginLeft="24sp"
+  	android:layout_marginTop="24sp"
+  	android:textSize="24sp">
+  </TextView>
+  <TextView
+  	android:text="Course Code: DIGIDES"
+  	android:id="@+id/coursecode_digiderp"
+  	android:layout_width="wrap_content" 
+  	android:layout_height="wrap_content"
+  	android:layout_below="@+id/title_digiderp"
+  	android:layout_marginLeft="24sp">
+  </TextView>
+  <TextView
+  	android:text="Section: S17"
+  	android:id="@+id/section_digiderp"
+  	android:layout_width="wrap_content" 
+  	android:layout_height="wrap_content"
+  	android:layout_below="@+id/coursecode_digiderp"
+  	android:layout_marginLeft="24sp">
+  </TextView>
+  <TextView
+  	android:text="Days: Monday and Thusday"
+  	android:id="@+id/days_digiderp"
+  	android:layout_width="wrap_content" 
+  	android:layout_height="wrap_content"
+  	android:layout_below="@+id/section_digiderp"
+  	android:layout_marginLeft="24sp">
+  </TextView>
+  <TextView
+  	android:text="Timeframe: 0940-1110"
+  	android:id="@+id/time_digiderp"
+  	android:layout_width="wrap_content" 
+  	android:layout_height="wrap_content"
+  	android:layout_below="@+id/days_digiderp"
+  	android:layout_marginLeft="24sp">
+  </TextView>
+  <TextView
+  	android:text="Instructor: Sir Herp Derp"
+  	android:id="@+id/instructor_digiderp"
+  	android:layout_width="wrap_content" 
+  	android:layout_height="wrap_content"
+  	android:layout_below="@+id/time_digiderp"
+  	android:layout_marginLeft="24sp">
+  </TextView>
+  <TextView
+  	android:text="Description:"
+  	android:id="@+id/descriptionstart_digiderp"
+  	android:layout_width="wrap_content" 
+  	android:layout_height="wrap_content"
+  	android:layout_below="@+id/instructor_digiderp"
+  	android:layout_marginLeft="24sp">
+  </TextView>
+  <TextView
+  	android:text="OMG THIS COURSE IS SO HARD"
+  	android:id="@+id/description_digiderp"
+  	android:layout_width="wrap_content" 
+  	android:layout_height="wrap_content"
+  	android:layout_below="@+id/descriptionstart_digiderp"
+  	android:layout_marginLeft="24sp">
+  </TextView>
+  
+</RelativeLayout>

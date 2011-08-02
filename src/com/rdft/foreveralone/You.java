@@ -5,6 +5,7 @@ import com.rdft.foreveralone.R;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.preference.PreferenceActivity;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
@@ -12,9 +13,8 @@ import android.widget.ListView;
 import android.widget.Toast;
 import android.view.*;
 import android.view.Menu;
-import android.view.MenuItem;
 
-public class You extends ListActivity {
+public class You extends PreferenceActivity {
 	/* Some variables for the options menu
 	private int addButtonID = Menu.FIRST;
 	private int sortButtonID = Menu.FIRST + 1;
@@ -25,14 +25,16 @@ public class You extends ListActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        
+        // Just something for the sake of demoing a GUI
+        addPreferencesFromResource(R.xml.fake_you);
+        /*
         String[] schedule = getResources().getStringArray(R.array.SCHED);
         setListAdapter(new ArrayAdapter<String>(this, R.layout.you, schedule));
 
         ListView lv = getListView();
         lv.setTextFilterEnabled(true);
         
-        /* Fake Progress bar */
+        Fake Progress bar
         ProgressDialog fakeProgress;
         fakeProgress = new ProgressDialog(this);
         fakeProgress.setMessage("Please wait for 3 valve years...");
@@ -44,7 +46,7 @@ public class You extends ListActivity {
 			System.out.println("Error! :(");
 		}
         fakeProgress.dismiss();
-        */
+        
         
         Toast.makeText(getApplicationContext(), "Click on a course to see more information", Toast.LENGTH_LONG).show();
         
@@ -83,13 +85,14 @@ public class You extends ListActivity {
 
                // show the alert box
               alertbox.show();
-              */
+              
           }
           
         });
-  		
+  		*/
         
 	}
+
 	/*
 	@Override
 	public void onCreateContextMenu(ContextMenu menu, View v,
@@ -122,6 +125,9 @@ public class You extends ListActivity {
 		 * menu.
 		 */
 		switch(item.getItemId()) {
+		case R.id.addyouicon:
+			Toast.makeText(this, "Edit icon selected", Toast.LENGTH_LONG).show();
+			break;
 		case R.id.edityouicon:
 			Toast.makeText(this, "Edit icon selected", Toast.LENGTH_LONG).show();
 			break;

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:orientation="vertical"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent">
+    <TextView 
+    	android:id="@+id/coursenametext" 
+    	android:layout_width="wrap_content" 
+    	android:layout_height="wrap_content" 
+    	android:text="Course Code" 
+    	android:layout_alignParentTop="true" 
+    	android:layout_alignParentLeft="true" 
+    	android:layout_marginLeft="20dp" 
+    	android:layout_marginTop="50dp"></TextView>
+    <EditText 
+    	android:id="@+id/editText1" 
+    	android:layout_width="wrap_content" 
+    	android:layout_height="wrap_content" 
+    	android:layout_below="@+id/coursenametext" 
+    	android:layout_alignLeft="@+id/coursenametext" >
+        <requestFocus></requestFocus>
+    </EditText>
+    <TextView 
+    	android:id="@+id/textView2" 
+    	android:layout_width="wrap_content" 
+    	android:layout_height="wrap_content" 
+    	android:text="Course Description" 
+    	android:layout_below="@+id/editText1" 
+    	android:layout_marginLeft="20dp">
+    </TextView>
+    <EditText 
+    	android:id="@+id/editText2" 
+    	android:layout_width="wrap_content" 
+    	android:layout_height="wrap_content" 
+    	android:layout_below="@+id/textView2"
+    	android:layout_marginLeft="20dp">
+    </EditText>
+    
+</RelativeLayout>

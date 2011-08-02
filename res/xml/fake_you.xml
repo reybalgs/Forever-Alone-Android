@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+  xmlns:android="http://schemas.android.com/apk/res/android" android:title="Schedule for" android:summary="John_McDerp">
+    <PreferenceCategory android:title="Monday">
+        <PreferenceScreen android:title="DIGIDES" android:summary="0940-1110 G209">
+            <PreferenceScreen android:layout="@layout/digiderp_details"></PreferenceScreen>
+        </PreferenceScreen><Preference android:summary="1300-1430 G207" android:title="SPEECOM"></Preference>
+        <Preference android:summary="1530-1750 G202" android:title="PERSEF2"></Preference>
+        
+    </PreferenceCategory>
+    <PreferenceCategory android:title="Tuesday">
+        <Preference android:summary="0940-1110 G203" android:title="TREDTWO"></Preference>
+        <Preference android:summary="1300-1430 G208" android:title="HCIFACE"></Preference>
+        <Preference android:summary="1440-1620 LS309" android:title="INTRODB"></Preference>
+    </PreferenceCategory>
+    <PreferenceCategory android:title="Thursday">
+        <Preference android:summary="0940-1110 G209" android:title="DIGIDES"></Preference>
+        <Preference android:title="SPEECOM" android:summary="1300-1430 G207"></Preference>
+    </PreferenceCategory>
+    <PreferenceCategory android:title="Friday">
+        <Preference android:summary="0940-1110 G203" android:title="TREDTWO"></Preference>
+        <Preference android:summary="1300-1430 G208" android:title="HCIFACE"></Preference>
+        <Preference android:summary="1440-1620 LS309" android:title="INTRODB"></Preference>
+    </PreferenceCategory>
+    
+</PreferenceScreen>
