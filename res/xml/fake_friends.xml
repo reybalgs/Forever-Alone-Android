@@ -7,7 +7,7 @@
     <PreferenceCategory android:title="L">
         <Preference 
         	android:summary="You have 4 mutual courses." 
-        	android:title="Lugkhast" android:layout="g">
+        	android:title="Lugkhast">
         </Preference>
     </PreferenceCategory>
     

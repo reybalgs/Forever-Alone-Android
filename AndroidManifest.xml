@@ -17,6 +17,7 @@
         <activity android:name=".You"></activity>
         <activity android:name=".Friends"></activity>
         <activity android:name=".Settings"></activity>
+        <activity android:name=".AddFriends"></activity>
         
 
     </application>

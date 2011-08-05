@@ -126,7 +126,10 @@ public class You extends PreferenceActivity {
 		 */
 		switch(item.getItemId()) {
 		case R.id.addyouicon:
-			Toast.makeText(this, "Edit icon selected", Toast.LENGTH_LONG).show();
+			// Toast.makeText(this, "Edit icon selected", Toast.LENGTH_LONG).show();
+			// Temporarily show a sample about course dialog
+			CourseInfoDialog courseinfo = new CourseInfoDialog(this);
+			courseinfo.show();
 			break;
 		case R.id.edityouicon:
 			Toast.makeText(this, "Edit icon selected", Toast.LENGTH_LONG).show();
