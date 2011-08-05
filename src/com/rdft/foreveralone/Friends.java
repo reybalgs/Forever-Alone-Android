@@ -14,7 +14,7 @@ import android.widget.Toast;
 import com.rdft.foreveralone.R;
 
 public class Friends extends PreferenceActivity {
-	Intent intent; // a reusable intent
+	Intent intention; // a reusable intent
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -48,8 +48,8 @@ public class Friends extends PreferenceActivity {
 		switch(item.getItemId()) {
 		case R.id.addfriendicon:
 			// show the add friend screen
-			intent = new Intent().setClass(this, AddFriends.class);
-			startActivity(intent);
+			intention = new Intent(this, AddFriends.class);
+			startActivity(intention);
 			break;
 		case R.id.editfriendsicon:
 			Toast.makeText(this, "Edit friends selected", Toast.LENGTH_LONG).show();
