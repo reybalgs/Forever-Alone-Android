@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="D">
+        <Preference android:summary="You have 3 mutual courses." android:title="Dharok"></Preference>
+    </PreferenceCategory>
+    <PreferenceCategory android:title="L">
+        <Preference 
+        	android:summary="You have 4 mutual courses." 
+        	android:title="Lugkhast">
+        </Preference>
+    </PreferenceCategory>
+    
+</PreferenceScreen>

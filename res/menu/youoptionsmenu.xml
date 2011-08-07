@@ -2,6 +2,11 @@
 <!--  This xml file makes up the options menu in the You tab -->
 <menu
   xmlns:android="http://schemas.android.com/apk/res/android">
+	<item 
+    	android:id="@+id/addyouicon"
+    	android:title="Add Course"
+    	android:icon="@android:drawable/ic_menu_add">
+    </item>
     <item 
     	android:id="@+id/edityouicon"
     	android:title="Edit Courses"

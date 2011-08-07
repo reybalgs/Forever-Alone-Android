@@ -28,4 +28,5 @@
     	<item>Fedora BLU</item>
     	<item>Red Hat RED</item>
     </string-array>
+    <string name="digiderp_details_title">Details about DIGIDERP</string>
 </resources>
