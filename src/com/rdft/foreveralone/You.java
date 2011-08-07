@@ -1,15 +1,8 @@
 package com.rdft.foreveralone;
 
 import com.rdft.foreveralone.R;
-
-import android.app.ListActivity;
-import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.widget.Toast;
 import android.view.*;
 import android.view.Menu;

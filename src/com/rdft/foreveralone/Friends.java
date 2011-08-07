@@ -1,14 +1,11 @@
 package com.rdft.foreveralone;
 
-import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.widget.Toast;
 
 import com.rdft.foreveralone.R;

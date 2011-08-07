@@ -10,7 +10,7 @@ public class CourseInfoDialog extends Dialog {
 	public CourseInfoDialog(Context context) {
 		super(context);
 		// TODO Auto-generated constructor stub
-		// Remove the title
+		// Sets the title and XML layout
 		setTitle("Details about DIGIDES");
 		setContentView(R.layout.digiderp_details);
 	}

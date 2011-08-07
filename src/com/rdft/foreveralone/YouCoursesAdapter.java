@@ -1,15 +1,13 @@
 package com.rdft.foreveralone;
 
-import java.util.List;
-
-import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 public class YouCoursesAdapter extends BaseAdapter {
-	private List<Course> coursesList;
-	private Context context;
+	/* This will serve as the adapter for the
+	 * special "Course" class.
+	 */
 	
 	public int getCount() {
 		// TODO Auto-generated method stub
