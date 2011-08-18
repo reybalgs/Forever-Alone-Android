@@ -19,6 +19,7 @@ import com.rdft.foreveralone.glue.debug.DebugConfig;
 import com.rdft.foreveralone.glue.models.University;
 
 public class CommHandler {
+	private static String TAG = "CommHandler";
 	HttpClient client;
 
 	public CommHandler() {
@@ -29,15 +30,15 @@ public class CommHandler {
 		client = customClient;
 	}
 
-	private JSONObject toJSON() {
-		return null;
-	}
-
 	private void post(String url) {
-		HttpPost request;
 		try {
-			request = new HttpPost(new URI(url));
-		} catch (URISyntaxException e) {
+			HttpPost request = new HttpPost(new URI(url));
+			client.execute(request);
+			
+		} catch (IOException e) {
+			DebugConfig.logError(TAG, "I/O error in HTTP POST");
+			e.printStackTrace();
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
@@ -45,11 +46,15 @@ public class CommHandler {
 	private JSONArray getArray(String url) {
 		JSONArray jsonArray = null;
 		try {
+			long start, end;
+			start = System.currentTimeMillis();
 			HttpGet request = new HttpGet(new URI(url));
 			HttpResponse response = client.execute(request);
+			end = System.currentTimeMillis();
+			DebugConfig.logInfo(TAG, "HTTP GET took [" + (end - start) + "] ms");
 			jsonArray = JSONParser.getArray(response);
 		} catch (IOException e) {
-			Log.e("FA_NETCODE", "I/O error in HTTP GET");
+			DebugConfig.logError(TAG, "I/O error in HTTP GET");
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -60,7 +65,7 @@ public class CommHandler {
 	public University[] getUniversities() {
 		JSONArray jsonArray = getArray(DebugConfig.getURL("/api/university"));
 		if (jsonArray == null) {
-			Log.e("FA_NETCODE", "Failed to retrieve universities!");
+			DebugConfig.logError(TAG, "Failed to retrieve universities!");
 			return null;
 		}
 		University[] universities = null;

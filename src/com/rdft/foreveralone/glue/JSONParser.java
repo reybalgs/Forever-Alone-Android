@@ -13,10 +13,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.rdft.foreveralone.glue.debug.DebugConfig;
+
 import android.util.Log;
 
 public class JSONParser {
-	private static String TAG = "FA_NETCODE_JSON";
+	private static String TAG = "JSONParser";
 	
 	private static String convertStreamToString(InputStream is) {
 		/*
@@ -78,7 +80,7 @@ public class JSONParser {
 		JSONObject jsonObjRecv = new JSONObject(resultString);
 
 		// Raw DEBUG output of our received JSON object:
-		Log.i(TAG, "<jsonobject>\n" + jsonObjRecv.toString()
+		DebugConfig.logInfo(TAG, "<jsonobject>\n" + jsonObjRecv.toString()
 				+ "\n</jsonobject>");
 
 		return jsonObjRecv;
@@ -88,7 +90,7 @@ public class JSONParser {
 			throws JSONException, IllegalStateException, IOException {
 		String json = getResultString(response);
 		JSONArray jsonArray = new JSONArray(json);
-		Log.i(TAG, "<jsonobject>\n" + jsonArray.toString()
+		DebugConfig.logInfo(TAG, "<jsonobject>\n" + jsonArray.toString()
 				+ "\n</jsonobject>");
 		return jsonArray;
 	}

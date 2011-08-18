@@ -8,10 +8,10 @@
 	<Button android:id="@+id/button1" android:text="NOPE!"
 		android:layout_height="wrap_content" android:layout_width="match_parent"
 		android:onClick="onButtonClick"></Button>
-	<Button android:id="@+id/button2" android:text="YEAH!"
+	<Button android:id="@+id/button2" android:text="GET /api/university"
 		android:layout_height="wrap_content" android:layout_width="match_parent"
 		android:onClick="onYeahButtonClick"></Button>
-	<Button android:id="@+id/button3" android:text="DISCONNECT PEOPLE"
+	<Button android:id="@+id/button3" android:text="Bokia. Disconnecting People."
 		android:layout_height="wrap_content" android:layout_width="match_parent"
 		android:onClick="disconnectPeople"></Button>
 </LinearLayout>
