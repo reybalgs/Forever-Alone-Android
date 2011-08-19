@@ -31,6 +31,7 @@ public class AccountList extends ListActivity {
 		Account account = (Account) getListView().getItemAtPosition(position);
 		Intent intent = new Intent(this, GlueLayerDebugActivity.class);
 		intent.putExtra("account", account);
+		
 		startActivity(intent);
 	}
 }
