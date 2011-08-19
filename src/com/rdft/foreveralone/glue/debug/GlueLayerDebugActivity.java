@@ -96,7 +96,7 @@ public class GlueLayerDebugActivity extends Activity implements ILoginReceiver {
 	public void onLoginComplete(DefaultHttpClient client) {
 		this.comm = new CommHandler(client);
 	}
-	
+
 	public void onProfilePostButtonClick(View v) {
 		if (comm == null) {
 			Toast t = Toast.makeText(this, "Not yet logged in",
@@ -104,7 +104,7 @@ public class GlueLayerDebugActivity extends Activity implements ILoginReceiver {
 			t.show();
 			return;
 		}
-		
+
 		comm.createDefaultProfile();
 	}
 
@@ -124,6 +124,25 @@ public class GlueLayerDebugActivity extends Activity implements ILoginReceiver {
 			Toast.makeText(this, "Failed to retrieve profile",
 					Toast.LENGTH_SHORT).show();
 			return;
+		}
+	}
+
+	public void onCurSchedButtonClick(View v) {
+		if (comm == null) {
+			Toast t = Toast.makeText(this, "Not yet logged in",
+					Toast.LENGTH_SHORT);
+			t.show();
+			return;
+		}
+
+		Schedule schedule;
+		try {
+			schedule = comm.getCurrentSchedule();
+			Toast.makeText(this, "Got schedule with " + schedule.classes.size()
+					+ " classes", Toast.LENGTH_LONG);
+		} catch (JSONException e) {
+			DebugConfig.logError(TAG, "Failed to parse current schedule JSON");
+			e.printStackTrace();
 		}
 	}
 }

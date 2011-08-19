@@ -12,6 +12,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.widget.Toast;
+
 import com.rdft.foreveralone.glue.debug.DebugConfig;
 import com.rdft.foreveralone.glue.models.*;
 
@@ -149,5 +151,12 @@ public class CommHandler {
 
 	public void createDefaultProfile() {
 		post(DebugConfig.getURL("/api/profile"));
+	}
+
+	public Schedule getCurrentSchedule() throws JSONException {
+		JSONObject jObj = getObject(DebugConfig.getURL("/api/schedule/current"));
+		Schedule schedule = new Schedule(jObj);
+
+		return schedule;
 	}
 }
