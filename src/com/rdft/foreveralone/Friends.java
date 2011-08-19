@@ -18,12 +18,21 @@ public class Friends extends ListActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+<<<<<<< HEAD
        
+=======
+        
+        
+>>>>>>> 36e0e15992914854c1de15af757e762ea8394c98
         String[] friends = getResources().getStringArray(R.array.FRIENDS);
         setListAdapter(new ArrayAdapter<String>(this, R.layout.friends, friends));
 
         ListView lv = getListView();
         lv.setTextFilterEnabled(true);
+<<<<<<< HEAD
+=======
+        
+>>>>>>> 36e0e15992914854c1de15af757e762ea8394c98
         /* When a friend's name is pressed, show various details about that
          * 	friend.
          */
