@@ -12,41 +12,48 @@ import android.widget.Toast;
 
 import com.rdft.foreveralone.R;
 
-public class Friends extends ListActivity {
-	Intent intention; // a reusable intent
-	
+public class FriendsList extends ListActivity {	
+	Intent intent = new Intent();
+	// Just a reusable intent
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState) 
+	{
         super.onCreate(savedInstanceState);
-       
+        
+        // String array for friend names
         String[] friends = getResources().getStringArray(R.array.FRIENDS);
+        
         setListAdapter(new ArrayAdapter<String>(this, R.layout.friends, friends));
-
+        registerForContextMenu(getListView());
+        
         ListView lv = getListView();
         lv.setTextFilterEnabled(true);
+        
         /* When a friend's name is pressed, show various details about that
          * 	friend.
          */
         
 	}
+	
 	// For the options menu
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
+	public boolean onCreateOptionsMenu(Menu menu) 
+	{
 		MenuInflater inflater = getMenuInflater();
 	    inflater.inflate(R.menu.friendsoptionsmenu, menu);
 	    return true;
 	}
 	
 	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
+	public boolean onOptionsItemSelected(MenuItem item) 
+	{
 		/* This function will handle the tapped icons in the options
 		 * menu.
 		 */
 		switch(item.getItemId()) {
 		case R.id.addfriendicon:
 			// show the add friend screen
-			intention = new Intent(this, AddFriends.class);
-			startActivity(intention);
+			
 			break;
 		case R.id.editfriendsicon:
 			Toast.makeText(this, "Edit friends selected", Toast.LENGTH_LONG).show();
@@ -61,3 +68,4 @@ public class Friends extends ListActivity {
 		return super.onOptionsItemSelected(item);
 	}
 }
+ 

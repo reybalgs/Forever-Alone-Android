@@ -1,48 +1,54 @@
 package com.rdft.foreveralone;
 
 import com.rdft.foreveralone.R;
+
+import android.app.ListActivity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.preference.PreferenceActivity;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.Toast;
 import android.view.*;
 import android.view.Menu;
 
-public class You extends PreferenceActivity {
+public class You extends ListActivity {
 	/* Some variables for the options menu
 	private int addButtonID = Menu.FIRST;
 	private int sortButtonID = Menu.FIRST + 1;
 	private int exitButtonID = Menu.FIRST + 2;
 	private int group1ID = 1;
 	*/
+	// Just an intent for invoking subactivities
+	Intent intention;
+	
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // Just something for the sake of demoing a GUI
-        addPreferencesFromResource(R.xml.fake_you);
-        /*
+        
         String[] schedule = getResources().getStringArray(R.array.SCHED);
         setListAdapter(new ArrayAdapter<String>(this, R.layout.you, schedule));
 
         ListView lv = getListView();
         lv.setTextFilterEnabled(true);
-        
+        /*
         Fake Progress bar
         ProgressDialog fakeProgress;
         fakeProgress = new ProgressDialog(this);
         fakeProgress.setMessage("Please wait for 3 valve years...");
         fakeProgress.setCancelable(true);
-        /*
+        */
+       /*
         try {
 			Thread.sleep(5000);
 		} catch (InterruptedException ex) {
 			System.out.println("Error! :(");
 		}
         fakeProgress.dismiss();
-        
+        */
         
         Toast.makeText(getApplicationContext(), "Click on a course to see more information", Toast.LENGTH_LONG).show();
-        
+        /*
         lv.setOnItemClickListener(new OnItemClickListener() {
           public void onItemClick(AdapterView<?> parent, View view,
               int position, long id) {
@@ -119,10 +125,9 @@ public class You extends PreferenceActivity {
 		 */
 		switch(item.getItemId()) {
 		case R.id.addyouicon:
-			// Toast.makeText(this, "Edit icon selected", Toast.LENGTH_LONG).show();
-			// Temporarily show a sample about course dialog
-			CourseInfoDialog courseinfo = new CourseInfoDialog(this);
-			courseinfo.show();
+			// Gets the addcourse screen activity
+			intention = new Intent(this, AddCourse.class);
+			startActivity(intention);
 			break;
 		case R.id.edityouicon:
 			Toast.makeText(this, "Edit icon selected", Toast.LENGTH_LONG).show();
