@@ -38,28 +38,30 @@ public class GlueLayerDebugActivity extends Activity implements ILoginReceiver {
 		toast.show();
 	}
 
-	public void onNopeButtonClick(View v) {
-		DebugConfig.logInfo(TAG, "NOPE");
+	public void onProfileUpdateButtonClick(View v) {
 		if (comm == null) {
 			Toast t = Toast.makeText(this, "Not yet logged in",
 					Toast.LENGTH_SHORT);
 			t.show();
 			return;
 		}
-		Course[] courses = comm.getCourses();
-
-		if (courses == null) {
-			showConnectionError();
-			return;
-		}
-
-		Toast t = Toast.makeText(this, "Successfully retrieved "
-				+ courses.length + " courses", Toast.LENGTH_SHORT);
-		t.show();
-
-		for (Course course : courses) {
-			DebugConfig.logInfo(TAG,
-					course.courseCode + " - " + course.getEntityKey());
+		
+		University[] universities;
+		UserProfile profile;
+		try {
+			universities = comm.getUniversities();
+			
+			if (universities.length == 0) {
+				Toast.makeText(this, "Add a university first", Toast.LENGTH_SHORT);
+				return;
+			}
+			
+			profile = comm.getProfile();
+			profile.university = universities[0];
+			comm.updateProfile(profile);
+			DebugConfig.logInfo(TAG, "Setting university to \"" + universities[0].name + "\"");
+		} catch (JSONException e) {
+			e.printStackTrace();
 		}
 	}
 
@@ -71,9 +73,12 @@ public class GlueLayerDebugActivity extends Activity implements ILoginReceiver {
 			t.show();
 			return;
 		}
-		University[] unis = comm.getUniversities();
-
-		if (unis == null) {
+		University[] unis;
+		
+		try {
+			unis = comm.getUniversities();
+		} catch (JSONException e) {
+			e.printStackTrace();
 			showConnectionError();
 			return;
 		}

@@ -6,9 +6,9 @@
 		android:text="Hello, World!" android:textAppearance="?android:attr/textAppearanceLarge"
 		android:layout_width="match_parent"></TextView>
 
-	<Button android:id="@+id/button1" android:text="GET /api/course"
+	<Button android:id="@+id/button1" android:text="Update University in Profile"
 		android:layout_height="wrap_content" android:layout_width="match_parent"
-		android:onClick="onNopeButtonClick"></Button>
+		android:onClick="onProfileUpdateButtonClick"></Button>
 
 	<Button android:id="@+id/button2" android:text="GET /api/university"
 		android:layout_height="wrap_content" android:layout_width="match_parent"

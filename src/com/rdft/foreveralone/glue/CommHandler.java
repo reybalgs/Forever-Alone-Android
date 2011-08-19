@@ -2,20 +2,28 @@ package com.rdft.foreveralone.glue;
 
 import java.io.IOException;
 import java.net.URI;
+import java.util.ArrayList;
+import java.util.List;
 
+import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.*;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.widget.Toast;
-
 import com.rdft.foreveralone.glue.debug.DebugConfig;
-import com.rdft.foreveralone.glue.models.*;
+import com.rdft.foreveralone.glue.models.Course;
+import com.rdft.foreveralone.glue.models.Schedule;
+import com.rdft.foreveralone.glue.models.University;
+import com.rdft.foreveralone.glue.models.UserProfile;
 
 public class CommHandler {
 	private static String TAG = "CommHandler";
@@ -45,9 +53,12 @@ public class CommHandler {
 
 	private void postJSON(String url, JSONObject jObj) {
 		try {
-			HttpPost request = new HttpPost(new URI(url));
-			StringEntity se = new StringEntity("json: " + jObj.toString());
-			request.setEntity(se);
+			DebugConfig.logInfo(TAG, "POSTing JSON to " + url);
+			HttpPost request = new HttpPost(url);
+			
+			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
+			nameValuePairs.add(new BasicNameValuePair("json", jObj.toString()));
+			request.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 			client.execute(request);
 		} catch (IOException e) {
 			DebugConfig.logError(TAG, "I/O error in HTTP POST");
@@ -117,21 +128,18 @@ public class CommHandler {
 		return courses;
 	}
 
-	public University[] getUniversities() {
+	public University[] getUniversities() throws JSONException {
 		JSONArray jsonArray = getArray(DebugConfig.getURL("/api/university"));
 		if (jsonArray == null) {
 			DebugConfig.logError(TAG, "Failed to retrieve universities!");
 			return null;
 		}
+		
 		University[] universities = null;
-		try {
-			universities = new University[jsonArray.length()];
-			for (int i = 0; i < jsonArray.length(); i++) {
-				JSONObject jUni = jsonArray.getJSONObject(i);
-				universities[i] = new University(jUni);
-			}
-		} catch (JSONException e) {
-			e.printStackTrace();
+		universities = new University[jsonArray.length()];
+		for (int i = 0; i < jsonArray.length(); i++) {
+			JSONObject jUni = jsonArray.getJSONObject(i);
+			universities[i] = new University(jUni);
 		}
 
 		return universities;
@@ -151,6 +159,11 @@ public class CommHandler {
 
 	public void createDefaultProfile() {
 		post(DebugConfig.getURL("/api/profile"));
+	}
+
+	public void updateProfile(UserProfile profile) throws JSONException {
+		JSONObject jProfile = profile.toJSONObject();
+		postJSON(DebugConfig.getURL("/api/profile"), jProfile);
 	}
 
 	public Schedule getCurrentSchedule() throws JSONException {
