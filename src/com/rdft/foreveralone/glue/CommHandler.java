@@ -23,7 +23,8 @@ public class CommHandler {
 	}
 
 	public CommHandler(HttpClient customClient) {
-		DebugConfig.logInfo(TAG, "CommHandler initialized with custom HttpClient");
+		DebugConfig.logInfo(TAG,
+				"CommHandler initialized with custom HttpClient");
 		client = customClient;
 	}
 
@@ -31,13 +32,33 @@ public class CommHandler {
 		try {
 			HttpPost request = new HttpPost(new URI(url));
 			client.execute(request);
-			
+
 		} catch (IOException e) {
 			DebugConfig.logError(TAG, "I/O error in HTTP POST");
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	private JSONObject getObject(String url) {
+		JSONObject jsonObj = null;
+		try {
+			long start, end;
+			start = System.currentTimeMillis();
+			HttpGet request = new HttpGet(new URI(url));
+			HttpResponse response = client.execute(request);
+			end = System.currentTimeMillis();
+			DebugConfig
+					.logInfo(TAG, "HTTP GET took [" + (end - start) + "] ms");
+			jsonObj = JSONParser.getObject(response);
+		} catch (IOException e) {
+			DebugConfig.logError(TAG, "I/O error in HTTP GET");
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return jsonObj;
 	}
 
 	private JSONArray getArray(String url) {
@@ -48,7 +69,8 @@ public class CommHandler {
 			HttpGet request = new HttpGet(new URI(url));
 			HttpResponse response = client.execute(request);
 			end = System.currentTimeMillis();
-			DebugConfig.logInfo(TAG, "HTTP GET took [" + (end - start) + "] ms");
+			DebugConfig
+					.logInfo(TAG, "HTTP GET took [" + (end - start) + "] ms");
 			jsonArray = JSONParser.getArray(response);
 		} catch (IOException e) {
 			DebugConfig.logError(TAG, "I/O error in HTTP GET");
@@ -58,14 +80,14 @@ public class CommHandler {
 		}
 		return jsonArray;
 	}
-	
+
 	public Course[] getCourses() {
 		JSONArray jArray = getArray(DebugConfig.getURL("/api/course"));
 		if (jArray == null) {
 			DebugConfig.logError(TAG, "Failed to retrieve courses!");
 			return null;
 		}
-		
+
 		Course[] courses = null;
 		try {
 			courses = new Course[jArray.length()];
@@ -95,12 +117,19 @@ public class CommHandler {
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
-		
+
 		return universities;
 	}
-	
-	public void addUniversity(University university) throws JSONException {
-		JSONObject jObj = university.toJSONObject();
-		
+
+	public UserProfile getProfile() throws JSONException {
+		JSONObject jObj = getObject(DebugConfig.getURL("/api/profile"));
+		if (jObj == null) {
+			DebugConfig.logError(TAG, "Failed to retrieve profile!");
+			return null;
+		}
+
+		UserProfile profile;
+		profile = new UserProfile(jObj);
+		return profile;
 	}
 }

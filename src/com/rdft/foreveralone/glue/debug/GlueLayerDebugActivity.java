@@ -1,6 +1,7 @@
 package com.rdft.foreveralone.glue.debug;
 
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONException;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -14,8 +15,7 @@ import com.rdft.foreveralone.glue.CommHandler;
 import com.rdft.foreveralone.glue.GlueService;
 import com.rdft.foreveralone.glue.auth.LoginTask;
 import com.rdft.foreveralone.glue.auth.LoginTask.ILoginReceiver;
-import com.rdft.foreveralone.glue.models.Course;
-import com.rdft.foreveralone.glue.models.University;
+import com.rdft.foreveralone.glue.models.*;
 
 public class GlueLayerDebugActivity extends Activity implements ILoginReceiver {
 	String TAG = "GlueDebug";
@@ -97,10 +97,22 @@ public class GlueLayerDebugActivity extends Activity implements ILoginReceiver {
 		this.comm = new CommHandler(client);
 	}
 
-	public void disconnectPeople(View v) {
-		Log.i(TAG, "DISCONNECTING PEOPLE - Now with Swipe.");
-		Toast t = Toast.makeText(this, "Disconnecting People. Now with Swipe.",
-				Toast.LENGTH_LONG);
-		t.show();
+	public void onProfileButtonClick(View v) {
+		if (comm == null) {
+			Toast t = Toast.makeText(this, "Not yet logged in",
+					Toast.LENGTH_SHORT);
+			t.show();
+			return;
+		}
+
+		UserProfile profile;
+		try {
+			profile = comm.getProfile();
+		} catch (JSONException e) {
+			e.printStackTrace();
+			Toast.makeText(this, "Failed to retrieve profile",
+					Toast.LENGTH_SHORT).show();
+			return;
+		}
 	}
 }

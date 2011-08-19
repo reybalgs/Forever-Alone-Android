@@ -74,8 +74,8 @@ public class JSONParser {
 	public static JSONObject getObject(HttpResponse response)
 			throws JSONException, IOException {
 		String resultString = getResultString(response);
-		resultString = resultString.substring(1, resultString.length() - 1);
-
+		DebugConfig.logInfo(TAG, "Received JSON: " + resultString);
+		
 		// Transform the String into a JSONObject
 		JSONObject jsonObjRecv = new JSONObject(resultString);
 
@@ -89,6 +89,7 @@ public class JSONParser {
 	public static JSONArray getArray(HttpResponse response)
 			throws JSONException, IllegalStateException, IOException {
 		String json = getResultString(response);
+		DebugConfig.logInfo(TAG, "Received JSON: " + json);
 		JSONArray jsonArray = new JSONArray(json);
 		DebugConfig.logInfo(TAG, "<jsonobject>\n" + jsonArray.toString()
 				+ "\n</jsonobject>");

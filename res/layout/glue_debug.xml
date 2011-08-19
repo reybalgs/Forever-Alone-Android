@@ -14,9 +14,9 @@
 		android:layout_height="wrap_content" android:layout_width="match_parent"
 		android:onClick="onYeahButtonClick"></Button>
 
-	<Button android:id="@+id/button3" android:text="Bokia. Disconnecting People."
+	<Button android:id="@+id/button3" android:text="GET /api/profile"
 		android:layout_height="wrap_content" android:layout_width="match_parent"
-		android:onClick="disconnectPeople"></Button>
+		android:onClick="onProfileButtonClick"></Button>
 
 	<Button android:id="@+id/loginButton" android:text="Log In"
 		android:layout_height="wrap_content" android:layout_width="match_parent"
