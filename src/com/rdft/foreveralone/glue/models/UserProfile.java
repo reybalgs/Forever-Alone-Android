@@ -8,11 +8,19 @@ public class UserProfile extends DatastoreEntity {
 	public String nickname;
 	University university;
 	Schedule currentSchedule;
-	
+
 	public UserProfile(JSONObject jObj) throws JSONException {
+		JSONObject jUni, jSched;
 		email = jObj.getString("email");
 		nickname = jObj.getString("nickname");
-		university = new University(jObj.getJSONObject("university"));
-		currentSchedule = new Schedule(jObj.getJSONObject("currentSchedule"));
+
+		jUni = safeGet(jObj, "university");
+		if (jUni != null) {
+			university = new University(jUni);
+		}
+
+		jSched = safeGet(jObj, "currentSchedule");
+		if (jSched != null)
+			currentSchedule = new Schedule(jSched);
 	}
 }

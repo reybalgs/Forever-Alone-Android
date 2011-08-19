@@ -6,6 +6,7 @@ import java.net.URI;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.*;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -28,11 +29,24 @@ public class CommHandler {
 		client = customClient;
 	}
 
-	private void postJSON(String url, JSONObject jObj) {
+	private void post(String url) {
 		try {
 			HttpPost request = new HttpPost(new URI(url));
 			client.execute(request);
+		} catch (IOException e) {
+			DebugConfig.logError(TAG, "I/O error in HTTP POST");
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
+	private void postJSON(String url, JSONObject jObj) {
+		try {
+			HttpPost request = new HttpPost(new URI(url));
+			StringEntity se = new StringEntity("json: " + jObj.toString());
+			request.setEntity(se);
+			client.execute(request);
 		} catch (IOException e) {
 			DebugConfig.logError(TAG, "I/O error in HTTP POST");
 			e.printStackTrace();
@@ -131,5 +145,9 @@ public class CommHandler {
 		UserProfile profile;
 		profile = new UserProfile(jObj);
 		return profile;
+	}
+
+	public void createDefaultProfile() {
+		post(DebugConfig.getURL("/api/profile"));
 	}
 }

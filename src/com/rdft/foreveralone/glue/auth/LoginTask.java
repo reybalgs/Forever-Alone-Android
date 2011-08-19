@@ -54,7 +54,7 @@ public class LoginTask extends AsyncTask<Void, Void, DefaultHttpClient> {
 	private DefaultHttpClient getAuthenticatedClient(String authToken)
 			throws LoginException {
 		DefaultHttpClient client = new DefaultHttpClient();
-		HttpGet request = new HttpGet(DebugConfig.getURL("/_ah/login?action=Login&continue=http://localhost/&auth=" + authToken));
+		HttpGet request = new HttpGet(DebugConfig.getURL("/_ah/login?email=lugkhast%40gmail.com&admin=False&action=Login&continue=http://localhost/&auth=" + authToken));
 		HttpResponse response;
 		boolean success = false;
 

@@ -96,8 +96,19 @@ public class GlueLayerDebugActivity extends Activity implements ILoginReceiver {
 	public void onLoginComplete(DefaultHttpClient client) {
 		this.comm = new CommHandler(client);
 	}
+	
+	public void onProfilePostButtonClick(View v) {
+		if (comm == null) {
+			Toast t = Toast.makeText(this, "Not yet logged in",
+					Toast.LENGTH_SHORT);
+			t.show();
+			return;
+		}
+		
+		comm.createDefaultProfile();
+	}
 
-	public void onProfileButtonClick(View v) {
+	public void onProfileGetButtonClick(View v) {
 		if (comm == null) {
 			Toast t = Toast.makeText(this, "Not yet logged in",
 					Toast.LENGTH_SHORT);

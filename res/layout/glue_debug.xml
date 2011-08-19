@@ -13,10 +13,14 @@
 	<Button android:id="@+id/button2" android:text="GET /api/university"
 		android:layout_height="wrap_content" android:layout_width="match_parent"
 		android:onClick="onYeahButtonClick"></Button>
-
-	<Button android:id="@+id/button3" android:text="GET /api/profile"
+		
+	<Button android:id="@+id/button3" android:text="POST /api/profile"
 		android:layout_height="wrap_content" android:layout_width="match_parent"
-		android:onClick="onProfileButtonClick"></Button>
+		android:onClick="onProfilePostButtonClick"></Button>
+
+	<Button android:id="@+id/button4" android:text="GET /api/profile"
+		android:layout_height="wrap_content" android:layout_width="match_parent"
+		android:onClick="onProfileGetButtonClick"></Button>
 
 	<Button android:id="@+id/loginButton" android:text="Log In"
 		android:layout_height="wrap_content" android:layout_width="match_parent"

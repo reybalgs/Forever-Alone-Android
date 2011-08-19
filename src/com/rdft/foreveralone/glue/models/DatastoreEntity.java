@@ -16,6 +16,14 @@ public class DatastoreEntity {
 		setEntityKey(jObj.getString("entityKey"));
 	}
 	
+	protected JSONObject safeGet(JSONObject jObj, String key) {
+		try {
+			return jObj.getJSONObject(key);
+		} catch (JSONException e) {
+			return null;
+		}
+	}
+	
 	public JSONObject toJSONObject() throws JSONException {
 		DebugConfig.logError("DatastoreEntity", "CRITICAL - Unimplemented toJSONObject!");
 		throw new Error();
