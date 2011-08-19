@@ -21,6 +21,9 @@
 		<activity android:name=".Friends"></activity>
 		<activity android:name=".Settings"></activity>
 		<activity android:name=".AddFriends"></activity>
+		
+		<activity android:name=".glue.auth.AccountList"></activity>
+		<activity android:name=".glue.debug.GlueLayerDebugActivity"></activity>
 
 
 	</application>

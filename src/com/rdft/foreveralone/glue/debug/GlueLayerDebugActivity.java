@@ -1,10 +1,14 @@
 package com.rdft.foreveralone.glue.debug;
 
+import org.apache.http.client.HttpClient;
+
 import com.rdft.foreveralone.R;
 import com.rdft.foreveralone.glue.CommHandler;
 import com.rdft.foreveralone.glue.GlueService;
 import com.rdft.foreveralone.glue.GlueService.LocalBinder;
-import com.rdft.foreveralone.glue.models.University;
+import com.rdft.foreveralone.glue.auth.AccountList;
+import com.rdft.foreveralone.glue.auth.LoginManager.ILoginCallback;
+import com.rdft.foreveralone.glue.models.*;
 
 import android.app.Activity;
 import android.content.ComponentName;
@@ -18,7 +22,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.Toast;
 
-public class GlueLayerDebugActivity extends Activity {
+public class GlueLayerDebugActivity extends Activity implements ILoginCallback {
 	GlueService mService;
 	boolean mBound = false;
 	String TAG = "GlueDebug";
@@ -28,7 +32,7 @@ public class GlueLayerDebugActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.glue_debug);
-		comm = new CommHandler();
+		// comm = new CommHandler();
 
 		Toast t = Toast.makeText(this, "Server address is "
 				+ DebugConfig.address, Toast.LENGTH_LONG);
@@ -42,7 +46,7 @@ public class GlueLayerDebugActivity extends Activity {
 		Intent intent = new Intent(this, GlueService.class);
 		bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
 
-		Log.i(TAG, "POOTIS SPENCER HERE");
+		DebugConfig.logInfo(TAG, "POOTIS SPENCER HERE");
 	}
 
 	@Override
@@ -54,35 +58,53 @@ public class GlueLayerDebugActivity extends Activity {
 			mBound = false;
 		}
 	}
+	
+	@Override
+	public void onLoginComplete(HttpClient authenticatedClient) {
+		comm = new CommHandler(authenticatedClient);
+	}
 
-	/**
-	 * Called when a button is clicked (the button in the layout file attaches
-	 * to this method with the android:onClick attribute)
-	 */
-	public void onButtonClick(View v) {
-		if (mBound) {
-			// Call a method from the DataService.
-			// However, if this call were something that might hang, then this
-			// request should
-			// occur in a separate thread to avoid slowing down the activity
-			// performance.
-			int num = mService.getRandomNumber();
-			Toast.makeText(this, "number: " + num, Toast.LENGTH_SHORT).show();
-			Log.i(TAG, "NUMBER: " + num);
-		} else {
-			Toast.makeText(this, "NOPE", Toast.LENGTH_SHORT).show();
-			Log.i(TAG, "NOPE!");
+	public void showConnectionError() {
+		Toast toast = Toast.makeText(this,
+				"Unable to connect - try again later", Toast.LENGTH_SHORT);
+		toast.show();
+	}
+
+	public void onNopeButtonClick(View v) {
+		DebugConfig.logInfo(TAG, "NOPE");
+		if (comm == null) {
+			Toast t = Toast.makeText(this, "Not yet logged in", Toast.LENGTH_SHORT);
+			t.show();
+			return;
+		}
+		Course[] courses = comm.getCourses();
+		
+		if (courses == null) {
+			showConnectionError();
+			return;
+		}
+		
+		Toast t = Toast.makeText(this, "Successfully retrieved "
+				+ courses.length + " courses",
+				Toast.LENGTH_SHORT);
+		t.show();
+		
+		for (Course course : courses) {
+			DebugConfig.logInfo(TAG, course.courseCode + " - " + course.getEntityKey());
 		}
 	}
 
 	public void onYeahButtonClick(View v) {
-		Log.i(TAG, "YEAH!");
+		DebugConfig.logInfo(TAG, "YEAH!");
+		if (comm == null) {
+			Toast t = Toast.makeText(this, "Not yet logged in", Toast.LENGTH_SHORT);
+			t.show();
+			return;
+		}
 		University[] unis = comm.getUniversities();
 
 		if (unis == null) {
-			Toast toast = Toast.makeText(this,
-					"Unable to connect - try again later", Toast.LENGTH_SHORT);
-			toast.show();
+			showConnectionError();
 			return;
 		}
 
@@ -91,8 +113,13 @@ public class GlueLayerDebugActivity extends Activity {
 				Toast.LENGTH_SHORT);
 		t.show();
 		for (University uni : unis) {
-			Log.i(TAG, uni.name);
+			DebugConfig.logInfo(TAG, uni.name + " - " + uni.getEntityKey());
 		}
+	}
+	
+	public void onLoginButtonClick(View v) {
+		Intent intent = new Intent(this, AccountList.class);
+		startActivity(intent);
 	}
 
 	public void disconnectPeople(View v) {
