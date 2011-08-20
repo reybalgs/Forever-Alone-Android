@@ -24,7 +24,7 @@ public class LoginTask extends AsyncTask<Void, Void, DefaultHttpClient> {
 	Activity parent;
 	DefaultHttpClient authenticatedClient;
 	String TAG = "LoginTask";
-	
+
 	public LoginTask(Activity activity) {
 		parent = activity;
 	}
@@ -32,29 +32,40 @@ public class LoginTask extends AsyncTask<Void, Void, DefaultHttpClient> {
 	private String getAuthToken() throws OperationCanceledException,
 			AuthenticatorException, IOException {
 		String authToken = null;
-		
+
 		AccountManager mgr = AccountManager.get(parent);
 		Account[] accts = mgr.getAccountsByType("com.google");
-		Account account = accts[0];
-		DebugConfig.logInfo(TAG, account.name);
-		AccountManagerFuture<Bundle> accountManagerFuture = mgr.getAuthToken(
-				account, "ah", true, null, null);
-		Bundle authTokenBundle = accountManagerFuture.getResult();
-		
-		Intent intent = (Intent) authTokenBundle.get(AccountManager.KEY_INTENT);
-		if (intent != null) {
-			parent.startActivity(intent);
-		} else {
-			authToken = authTokenBundle.get(AccountManager.KEY_AUTHTOKEN)
-				.toString();
+		if (accts.length > 0) {
+			Account account = accts[0];
+			DebugConfig.logInfo(TAG, account.name);
+			AccountManagerFuture<Bundle> accountManagerFuture = mgr
+					.getAuthToken(account, "ah", true, null, null);
+			Bundle authTokenBundle = accountManagerFuture.getResult();
+
+			Intent intent = (Intent) authTokenBundle
+					.get(AccountManager.KEY_INTENT);
+			if (intent != null) {
+				parent.startActivity(intent);
+			} else {
+				authToken = authTokenBundle.get(AccountManager.KEY_AUTHTOKEN)
+						.toString();
+			}
+		} else if (DebugConfig.ALLOW_FAKE_ACCOUNTS) {
+			DebugConfig.logError(TAG, "No accounts found! Now "
+					+ "assuming server is App Engine dev appserver.");
+			authToken = "abcde";
 		}
+
 		return authToken;
 	}
 
 	private DefaultHttpClient getAuthenticatedClient(String authToken)
 			throws LoginException {
 		DefaultHttpClient client = new DefaultHttpClient();
-		HttpGet request = new HttpGet(DebugConfig.getURL("/_ah/login?email=lugkhast%40gmail.com&admin=False&action=Login&continue=http://localhost/&auth=" + authToken));
+		HttpGet request = new HttpGet(
+				DebugConfig
+						.getURL("/_ah/login?email=lugkhast%40gmail.com&admin=False&action=Login&continue=http://localhost/&auth="
+								+ authToken));
 		HttpResponse response;
 		boolean success = false;
 
@@ -72,12 +83,11 @@ public class LoginTask extends AsyncTask<Void, Void, DefaultHttpClient> {
 
 			for (Cookie cookie : client.getCookieStore().getCookies()) {
 				/*
-				if (cookie.getName().equals("ACSID")) {
-					success = true;
-					DebugConfig.logInfo(TAG, "Successfully retrieved cookie!");
-				}
-				*/
+				 * if (cookie.getName().equals("ACSID")) { success = true;
+				 * DebugConfig.logInfo(TAG, "Successfully retrieved cookie!"); }
+				 */
 			}
+			success = true;
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -85,7 +95,12 @@ public class LoginTask extends AsyncTask<Void, Void, DefaultHttpClient> {
 		// Revert the setting
 		client.getParams().setBooleanParameter(ClientPNames.HANDLE_REDIRECTS,
 				true);
-		return client;
+		if (success) {
+			return client;
+		} else {
+			DebugConfig.logError(TAG, "Authentication failed - not returning unauth'd HttpClient");
+			return null;
+		}
 	}
 
 	@Override
@@ -108,12 +123,12 @@ public class LoginTask extends AsyncTask<Void, Void, DefaultHttpClient> {
 
 		return client;
 	}
-	
+
 	protected void onPostExecute(DefaultHttpClient client) {
 		ILoginReceiver receiver = (ILoginReceiver) parent;
 		receiver.onLoginComplete(client);
 	}
-	
+
 	public interface ILoginReceiver {
 		public void onLoginComplete(DefaultHttpClient client);
 	}

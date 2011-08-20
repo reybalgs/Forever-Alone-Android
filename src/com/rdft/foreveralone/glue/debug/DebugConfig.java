@@ -3,9 +3,11 @@ package com.rdft.foreveralone.glue.debug;
 import android.util.Log;
 
 public class DebugConfig {
-	public static String address = "192.168.1.51:8080";
+	// public static String address = "192.168.1.51:8080"; // at ~/
+	public static String address = "192.168.1.114:8080"; // at BH
 	// public static String address = "10.0.2.2:8080"; // For the emulator
 	public static String TAG = "ForeverAlone";
+	public static final boolean ALLOW_FAKE_ACCOUNTS = true;
 	
 	public static String getURL(String path) {
 		return "http://" + address + path;

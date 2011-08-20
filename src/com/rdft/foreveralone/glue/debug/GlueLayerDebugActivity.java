@@ -1,12 +1,10 @@
 package com.rdft.foreveralone.glue.debug;
 
-
 import com.rdft.foreveralone.R;
 import com.rdft.foreveralone.glue.CommHandler;
 import com.rdft.foreveralone.glue.GlueService;
 import com.rdft.foreveralone.glue.GlueService.LocalBinder;
 import com.rdft.foreveralone.glue.models.University;
-
 
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONException;
@@ -39,7 +37,7 @@ public class GlueLayerDebugActivity extends Activity implements ILoginReceiver {
 				+ DebugConfig.address, Toast.LENGTH_LONG);
 		t.show();
 	}
-	
+
 	public void showConnectionError() {
 		Toast toast = Toast.makeText(this,
 				"Unable to connect - try again later", Toast.LENGTH_SHORT);
@@ -53,21 +51,23 @@ public class GlueLayerDebugActivity extends Activity implements ILoginReceiver {
 			t.show();
 			return;
 		}
-		
+
 		University[] universities;
 		UserProfile profile;
 		try {
 			universities = comm.getUniversities();
-			
+
 			if (universities.length == 0) {
-				Toast.makeText(this, "Add a university first", Toast.LENGTH_SHORT);
+				Toast.makeText(this, "Add a university first",
+						Toast.LENGTH_SHORT);
 				return;
 			}
-			
+
 			profile = comm.getProfile();
 			profile.university = universities[0];
 			comm.updateProfile(profile);
-			DebugConfig.logInfo(TAG, "Setting university to \"" + universities[0].name + "\"");
+			DebugConfig.logInfo(TAG, "Setting university to \""
+					+ universities[0].name + "\"");
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
@@ -82,7 +82,7 @@ public class GlueLayerDebugActivity extends Activity implements ILoginReceiver {
 			return;
 		}
 		University[] unis;
-		
+
 		try {
 			unis = comm.getUniversities();
 		} catch (JSONException e) {
@@ -107,7 +107,12 @@ public class GlueLayerDebugActivity extends Activity implements ILoginReceiver {
 
 	@Override
 	public void onLoginComplete(DefaultHttpClient client) {
-		this.comm = new CommHandler(client);
+		if (client != null) {
+			this.comm = new CommHandler(client);
+			Toast.makeText(this, "You are now logged in", Toast.LENGTH_SHORT).show();
+		} else {
+			Toast.makeText(this, "Login failed", Toast.LENGTH_SHORT).show();
+		}
 	}
 
 	public void onProfilePostButtonClick(View v) {
