@@ -3,7 +3,9 @@
   xmlns:android="http://schemas.android.com/apk/res/android"
   android:orientation="vertical"
   android:layout_width="match_parent"
-  android:layout_height="match_parent">
+  android:layout_height="match_parent"
+  android:layout_marginLeft="10sp"
+  android:layout_marginRight="10sp">
     <TextView 
     	android:id="@+id/coursecodetext" 
     	android:layout_width="wrap_content" 
@@ -12,21 +14,46 @@
     	android:layout_alignParentTop="true" 
     	android:layout_alignParentLeft="true" 
     	android:layout_marginLeft="10dp" 
-    	android:layout_marginTop="50dp"></TextView>
+    	android:layout_marginTop="50dp"/>
     <EditText 
-    	android:id="@+id/account_box" 
-    	android:layout_width="wrap_content" 
-    	android:layout_height="fill_parent"
+    	android:id="@+id/coursecodebox" 
+    	android:layout_width="fill_parent" 
+    	android:layout_height="wrap_content"
     	android:layout_below="@+id/coursecodetext" 
     	android:layout_alignLeft="@+id/coursecodetext" >
         <requestFocus></requestFocus>
     </EditText>
+    <TextView 
+    	android:id="@+id/coursedescription" 
+    	android:layout_width="wrap_content" 
+    	android:layout_height="wrap_content" 
+    	android:text="Course description"
+    	android:layout_below="@+id/coursecodebox"
+    	android:layout_alignParentLeft="true" 
+    	android:layout_marginLeft="10dp"
+    	android:layout_marginTop="16sp" />
+    <EditText 
+    	android:id="@+id/coursedescriptionbox" 
+    	android:layout_width="fill_parent" 
+    	android:layout_height="wrap_content"
+    	android:layout_below="@+id/coursedescription" 
+    	android:layout_alignLeft="@+id/coursecodetext" >
+        <requestFocus></requestFocus>
+    </EditText>
     <Button
-    	android:id="@+id/addcoursecreatebutton"
-    	android:text="Search"
+    	android:id="@+id/editschedulebutton"
+    	android:text="Add a schedule"
     	android:layout_height="wrap_content"
      	android:layout_width="wrap_content"
-    	android:layout_below="@+id/account_box"
-    	android:layout_alignLeft="@+id/account_box"
+    	android:layout_below="@+id/coursedescriptionbox"
+		android:layout_centerHorizontal="true"
+    	android:onClick="onClick"/>
+    <Button
+    	android:id="@+id/addcoursecreatebutton"
+    	android:text="Create course"
+    	android:layout_height="wrap_content"
+     	android:layout_width="wrap_content"
+    	android:layout_below="@+id/editschedulebutton"
+    	android:layout_centerHorizontal="true"
     	android:onClick="onClick"/>
 </RelativeLayout>

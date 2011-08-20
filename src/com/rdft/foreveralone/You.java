@@ -3,10 +3,7 @@ package com.rdft.foreveralone;
 import com.rdft.foreveralone.R;
 
 import android.app.ListActivity;
-<<<<<<< HEAD
 import android.content.Intent;
-=======
->>>>>>> 36e0e15992914854c1de15af757e762ea8394c98
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -41,7 +38,6 @@ public class You extends ListActivity {
         fakeProgress.setMessage("Please wait for 3 valve years...");
         fakeProgress.setCancelable(true);
         */
-<<<<<<< HEAD
        /*
 =======
         /*
