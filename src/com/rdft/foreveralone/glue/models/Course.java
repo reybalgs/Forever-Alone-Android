@@ -4,13 +4,23 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class Course extends DatastoreEntity {
-	String courseCode;
-	String description;
-	University university;
+	public String courseCode;
+	public String description;
+	public University university;
 	
 	public Course(JSONObject jObj) throws JSONException {
 		super(jObj);
 		courseCode = jObj.getString("courseCode");
 		description = jObj.getString("description");
+	}
+	
+	@Override
+	public JSONObject toJSONObject() throws JSONException {
+		JSONObject jObj = new JSONObject();
+		jObj.put("courseCode", courseCode);
+		jObj.put("description", description);
+		jObj.put("university", university);
+		
+		return jObj;
 	}
 }

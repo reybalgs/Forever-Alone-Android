@@ -1,26 +1,31 @@
 package com.rdft.foreveralone.glue.debug;
 
+
 import com.rdft.foreveralone.R;
 import com.rdft.foreveralone.glue.CommHandler;
 import com.rdft.foreveralone.glue.GlueService;
 import com.rdft.foreveralone.glue.GlueService.LocalBinder;
 import com.rdft.foreveralone.glue.models.University;
 
+
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONException;
+
 import android.app.Activity;
-import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
-import android.content.ServiceConnection;
 import android.os.Bundle;
-import android.os.IBinder;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.Toast;
 
-public class GlueLayerDebugActivity extends Activity {
-	GlueService mService;
-	boolean mBound = false;
+import com.rdft.foreveralone.R;
+import com.rdft.foreveralone.glue.CommHandler;
+import com.rdft.foreveralone.glue.GlueService;
+import com.rdft.foreveralone.glue.auth.LoginTask;
+import com.rdft.foreveralone.glue.auth.LoginTask.ILoginReceiver;
+import com.rdft.foreveralone.glue.models.*;
+
+public class GlueLayerDebugActivity extends Activity implements ILoginReceiver {
 	String TAG = "GlueDebug";
 	CommHandler comm;
 
@@ -28,61 +33,61 @@ public class GlueLayerDebugActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.glue_debug);
-		comm = new CommHandler();
+		// comm = new CommHandler();
 
 		Toast t = Toast.makeText(this, "Server address is "
 				+ DebugConfig.address, Toast.LENGTH_LONG);
 		t.show();
 	}
-
-	@Override
-	protected void onStart() {
-		super.onStart();
-		// Bind to DataService
-		Intent intent = new Intent(this, GlueService.class);
-		bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
-
-		Log.i(TAG, "POOTIS SPENCER HERE");
+	
+	public void showConnectionError() {
+		Toast toast = Toast.makeText(this,
+				"Unable to connect - try again later", Toast.LENGTH_SHORT);
+		toast.show();
 	}
 
-	@Override
-	protected void onStop() {
-		super.onStop();
-		// Unbind from the service
-		if (mBound) {
-			unbindService(mConnection);
-			mBound = false;
+	public void onProfileUpdateButtonClick(View v) {
+		if (comm == null) {
+			Toast t = Toast.makeText(this, "Not yet logged in",
+					Toast.LENGTH_SHORT);
+			t.show();
+			return;
 		}
-	}
-
-	/**
-	 * Called when a button is clicked (the button in the layout file attaches
-	 * to this method with the android:onClick attribute)
-	 */
-	public void onButtonClick(View v) {
-		if (mBound) {
-			// Call a method from the DataService.
-			// However, if this call were something that might hang, then this
-			// request should
-			// occur in a separate thread to avoid slowing down the activity
-			// performance.
-			int num = mService.getRandomNumber();
-			Toast.makeText(this, "number: " + num, Toast.LENGTH_SHORT).show();
-			Log.i(TAG, "NUMBER: " + num);
-		} else {
-			Toast.makeText(this, "NOPE", Toast.LENGTH_SHORT).show();
-			Log.i(TAG, "NOPE!");
+		
+		University[] universities;
+		UserProfile profile;
+		try {
+			universities = comm.getUniversities();
+			
+			if (universities.length == 0) {
+				Toast.makeText(this, "Add a university first", Toast.LENGTH_SHORT);
+				return;
+			}
+			
+			profile = comm.getProfile();
+			profile.university = universities[0];
+			comm.updateProfile(profile);
+			DebugConfig.logInfo(TAG, "Setting university to \"" + universities[0].name + "\"");
+		} catch (JSONException e) {
+			e.printStackTrace();
 		}
 	}
 
 	public void onYeahButtonClick(View v) {
-		Log.i(TAG, "YEAH!");
-		University[] unis = comm.getUniversities();
-
-		if (unis == null) {
-			Toast toast = Toast.makeText(this,
-					"Unable to connect - try again later", Toast.LENGTH_SHORT);
-			toast.show();
+		DebugConfig.logInfo(TAG, "YEAH!");
+		if (comm == null) {
+			Toast t = Toast.makeText(this, "Not yet logged in",
+					Toast.LENGTH_SHORT);
+			t.show();
+			return;
+		}
+		University[] unis;
+		
+		try {
+			unis = comm.getUniversities();
+		} catch (JSONException e) {
+			e.printStackTrace();
+			showConnectionError();
 			return;
 		}
 
@@ -91,30 +96,66 @@ public class GlueLayerDebugActivity extends Activity {
 				Toast.LENGTH_SHORT);
 		t.show();
 		for (University uni : unis) {
-			Log.i(TAG, uni.name);
+			DebugConfig.logInfo(TAG, uni.name + " - " + uni.getEntityKey());
 		}
 	}
 
-	public void disconnectPeople(View v) {
-		Log.i(TAG, "DISCONNECTING PEOPLE - Now with Swipe.");
-		Toast t = Toast.makeText(this, "Disconnecting People. Now with Swipe.",
-				Toast.LENGTH_LONG);
-		t.show();
+	public void onLoginButtonClick(View v) {
+		LoginTask task = new LoginTask(this);
+		task.execute(null);
 	}
 
-	/** Defines callbacks for service binding, passed to bindService() */
-	private ServiceConnection mConnection = new ServiceConnection() {
+	@Override
+	public void onLoginComplete(DefaultHttpClient client) {
+		this.comm = new CommHandler(client);
+	}
 
-		public void onServiceConnected(ComponentName className, IBinder service) {
-			// We've bound to DataService, cast the IBinder and get DataService
-			// instance
-			LocalBinder binder = (LocalBinder) service;
-			mService = binder.getService();
-			mBound = true;
+	public void onProfilePostButtonClick(View v) {
+		if (comm == null) {
+			Toast t = Toast.makeText(this, "Not yet logged in",
+					Toast.LENGTH_SHORT);
+			t.show();
+			return;
 		}
 
-		public void onServiceDisconnected(ComponentName arg0) {
-			mBound = false;
+		comm.createDefaultProfile();
+	}
+
+	public void onProfileGetButtonClick(View v) {
+		if (comm == null) {
+			Toast t = Toast.makeText(this, "Not yet logged in",
+					Toast.LENGTH_SHORT);
+			t.show();
+			return;
 		}
-	};
+
+		UserProfile profile;
+		try {
+			profile = comm.getProfile();
+		} catch (JSONException e) {
+			e.printStackTrace();
+			Toast.makeText(this, "Failed to retrieve profile",
+					Toast.LENGTH_SHORT).show();
+			return;
+		}
+	}
+
+	public void onCurSchedButtonClick(View v) {
+		if (comm == null) {
+			Toast t = Toast.makeText(this, "Not yet logged in",
+					Toast.LENGTH_SHORT);
+			t.show();
+			return;
+		}
+
+		Schedule schedule;
+		try {
+			schedule = comm.getCurrentSchedule();
+			Toast.makeText(this, "Got schedule with " + schedule.classes.size()
+					+ " classes", Toast.LENGTH_LONG);
+		} catch (JSONException e) {
+			DebugConfig.logError(TAG, "Failed to parse current schedule JSON");
+			e.printStackTrace();
+		}
+	}
 }
