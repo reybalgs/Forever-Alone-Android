@@ -1,7 +1,6 @@
 package com.rdft.foreveralone.glue.models;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 import org.json.JSONArray;
 import org.json.JSONException;

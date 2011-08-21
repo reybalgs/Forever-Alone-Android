@@ -105,7 +105,6 @@ public class GlueLayerDebugActivity extends Activity implements ILoginReceiver {
 		task.execute(null);
 	}
 
-	@Override
 	public void onLoginComplete(DefaultHttpClient client) {
 		if (client != null) {
 			this.comm = new CommHandler(client);

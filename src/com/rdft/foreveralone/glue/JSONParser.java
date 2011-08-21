@@ -15,7 +15,6 @@ import org.json.JSONObject;
 
 import com.rdft.foreveralone.glue.debug.DebugConfig;
 
-import android.util.Log;
 
 public class JSONParser {
 	private static String TAG = "JSONParser";
