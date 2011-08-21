@@ -18,9 +18,10 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
+import com.rdft.foreveralone.glue.FaHttpClient;
 import com.rdft.foreveralone.glue.debug.DebugConfig;
 
-public class LoginTask extends AsyncTask<Void, Void, DefaultHttpClient> {
+public class LoginTask extends AsyncTask<Void, Void, FaHttpClient> {
 	Activity parent;
 	DefaultHttpClient authenticatedClient;
 	String TAG = "LoginTask";
@@ -59,9 +60,9 @@ public class LoginTask extends AsyncTask<Void, Void, DefaultHttpClient> {
 		return authToken;
 	}
 
-	private DefaultHttpClient getAuthenticatedClient(String authToken)
+	private FaHttpClient getAuthenticatedClient(String authToken)
 			throws LoginException {
-		DefaultHttpClient client = new DefaultHttpClient();
+		FaHttpClient client = new FaHttpClient();
 		HttpGet request = new HttpGet(
 				DebugConfig
 						.getURL("/_ah/login?email=lugkhast%40gmail.com&admin=False&action=Login&continue=http://localhost/&auth="
@@ -104,9 +105,9 @@ public class LoginTask extends AsyncTask<Void, Void, DefaultHttpClient> {
 	}
 
 	@Override
-	protected DefaultHttpClient doInBackground(Void... stuff) {
+	protected FaHttpClient doInBackground(Void... stuff) {
 		String authToken = null;
-		DefaultHttpClient client = null;
+		FaHttpClient client = null;
 		try {
 			authToken = getAuthToken();
 			client = getAuthenticatedClient(authToken);
@@ -124,12 +125,12 @@ public class LoginTask extends AsyncTask<Void, Void, DefaultHttpClient> {
 		return client;
 	}
 
-	protected void onPostExecute(DefaultHttpClient client) {
+	protected void onPostExecute(FaHttpClient client) {
 		ILoginReceiver receiver = (ILoginReceiver) parent;
 		receiver.onLoginComplete(client);
 	}
 
 	public interface ILoginReceiver {
-		public void onLoginComplete(DefaultHttpClient client);
+		public void onLoginComplete(FaHttpClient client);
 	}
 }

@@ -12,6 +12,7 @@ public class Schedule extends DatastoreEntity {
 	public ArrayList<Section> classes;
 	
 	public Schedule(JSONObject jObj) throws JSONException {
+		super(jObj);
 		term = jObj.getInt("term");
 		year = jObj.getInt("year");
 		
@@ -22,5 +23,31 @@ public class Schedule extends DatastoreEntity {
 			Section section = new Section(jClass);
 			classes.add(section);
 		}
+	}
+	
+	public void addClass(Section section) {
+		classes.add(section);
+	}
+	
+	protected JSONArray getSectionsJSON() throws JSONException {
+		JSONArray jArray = new JSONArray();
+		for (Section section : classes) {
+			jArray.put(section.toJSONObject());
+		}
+		
+		return jArray;
+	}
+	
+	public String getAPIPath() {
+		return "/api/schedule";
+	}
+	
+	public JSONObject toJSONObject() throws JSONException {
+		JSONObject jObj = new JSONObject();
+		jObj.put("term", term);
+		jObj.put("year", year);
+		jObj.put("classes", getSectionsJSON());
+		
+		return jObj;
 	}
 }

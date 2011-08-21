@@ -8,6 +8,10 @@ import com.rdft.foreveralone.glue.debug.DebugConfig;
 public class DatastoreEntity {
 	private String entityKey;
 	
+	public String getAPIPath() {
+		return "/api/nope";
+	}
+	
 	public DatastoreEntity() {
 		
 	}
@@ -34,7 +38,12 @@ public class DatastoreEntity {
 	}
 
 	protected void setEntityKey(String entityKey) {
-		// Don't allow the entity key to be modified if we already have one
+		/* 
+		 * The entity key is the App Engine datastore's identifier for
+		 * instances of an object.
+		 * 
+		 * Don't allow the entity key to be modified if we already have one.
+		 */
 		if (this.entityKey == null) {
 			this.entityKey = entityKey;
 		} else {

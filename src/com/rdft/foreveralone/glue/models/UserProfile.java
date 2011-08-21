@@ -32,6 +32,10 @@ public class UserProfile extends DatastoreEntity {
 		defaultClassLength = jObj.getInt("defaultClassLength");
 		autoCalculateEndTime = jObj.getBoolean("autoCalculateEndTime");
 	}
+	
+	public String getAPIPath() {
+		return "/api/profile";
+	}
 
 	public JSONObject toJSONObject() throws JSONException {
 		JSONObject jObj = new JSONObject();
