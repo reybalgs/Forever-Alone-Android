@@ -96,20 +96,6 @@ public class CommHandler {
 		http.post(DebugConfig.getURL("/api/profile"));
 	}
 
-	public void update(DatastoreEntity thing) throws JSONException {
-		JSONObject jsonObj = thing.toJSONObject();
-		String path = thing.getAPIPath();
-		
-		DebugConfig.logInfo(TAG, "SENDING JSON: " + jsonObj.toString());
-
-		if (thing.getEntityKey() != null) {
-			http.putJSON(path, jsonObj);
-		} else {
-			DebugConfig.logInfo(TAG, "Object has no entity key, telling server to create new one");
-			http.postJSON(path, jsonObj);
-		}
-	}
-
 	public Schedule getCurrentSchedule() throws JSONException {
 		JSONObject jObj;
 		jObj = http.getObject(DebugConfig.getURL("/api/schedule/current"));
@@ -121,6 +107,20 @@ public class CommHandler {
 			return null;
 		}
 		return schedule;
+	}
+
+	public void update(DatastoreEntity thing) throws JSONException {
+		JSONObject jsonObj = thing.toJSONObject();
+		String path = thing.getAPIPath();
+
+		DebugConfig.logInfo(TAG, "SENDING JSON: " + jsonObj.toString());
+
+		if (thing.getEntityKey() == null) {
+			DebugConfig
+					.logInfo(TAG,
+							"NOTE: Object has no entity key");
+		}
+		http.postJSON(path, jsonObj);
 	}
 
 	public interface ISendable {

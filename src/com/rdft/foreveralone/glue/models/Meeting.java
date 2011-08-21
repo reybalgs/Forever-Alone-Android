@@ -22,6 +22,17 @@ public class Meeting extends DatastoreEntity {
 	Date startTime;
 	Date endTime;
 	
+	public Meeting(JSONObject jObj) throws JSONException {
+		super(jObj);
+		days = jObj.getInt("days");
+
+		JSONObject jStart = jObj.getJSONObject("startTime");
+		startTime = jsonToDate(jStart);
+		
+		JSONObject jEnd = jObj.getJSONObject("endTime");
+		endTime = jsonToDate(jEnd);
+	}
+	
 	public String getAPIPath() {
 		return "/api/meeting";
 	}
@@ -39,17 +50,6 @@ public class Meeting extends DatastoreEntity {
 		}
 
 		return time;
-	}
-
-	public Meeting(JSONObject jObj) throws JSONException {
-		super(jObj);
-		days = jObj.getInt("days");
-
-		JSONObject jStart = jObj.getJSONObject("startTime");
-		startTime = jsonToDate(jStart);
-		
-		JSONObject jEnd = jObj.getJSONObject("endTime");
-		endTime = jsonToDate(jEnd);
 	}
 
 	@Override

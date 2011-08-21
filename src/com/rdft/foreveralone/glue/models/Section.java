@@ -36,6 +36,18 @@ public class Section extends DatastoreEntity {
 		meetings.add(meeting);
 	}
 	
+	public Meeting[] getMeetings() {
+		Meeting[] meetArray = new Meeting[meetings.size()];
+		int index = 0;
+		
+		for (Meeting meeting : meetings) {
+			meetArray[index] = meeting;
+			index++;
+		}
+		
+		return meetArray;
+	}
+	
 	protected JSONArray getMeetingsJSON() throws JSONException {
 		JSONArray jArray = new JSONArray();
 		for (Meeting meeting : meetings) {
