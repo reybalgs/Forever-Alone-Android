@@ -1,6 +1,9 @@
 package com.rdft.foreveralone;
 
+import java.util.ArrayList;
+
 import com.rdft.foreveralone.R;
+import com.rdft.foreveralone.glue.models.Course;
 
 import android.app.ListActivity;
 import android.content.Intent;
@@ -10,6 +13,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 import android.view.*;
 import android.view.Menu;
+import com.rdft.foreveralone.DummyValues;
 
 public class You extends ListActivity {
 	/* Some variables for the options menu
@@ -20,14 +24,17 @@ public class You extends ListActivity {
 	*/
 	// Just an intent for invoking subactivities
 	Intent intention;
-	
+	private ArrayList<Course> m_courses = null;
+	private YouCourseAdapter m_adapter;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
-        String[] schedule = getResources().getStringArray(R.array.SCHED);
-        setListAdapter(new ArrayAdapter<String>(this, R.layout.you, schedule));
+        m_courses = new ArrayList<Course>();
+        m_courses.add(DummyValues.fakeCourse);
+        this.m_adapter = new YouCourseAdapter(this, R.layout.you, m_courses);
+        setListAdapter(this.m_adapter);
 
         ListView lv = getListView();
         lv.setTextFilterEnabled(true);

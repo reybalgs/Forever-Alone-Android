@@ -23,4 +23,14 @@ public class Course extends DatastoreEntity {
 		
 		return jObj;
 	}
+	
+	public String getCourseCode()
+	{
+		return courseCode;
+	}
+	
+	public String getDescription()
+	{
+		return description;
+	}
 }
