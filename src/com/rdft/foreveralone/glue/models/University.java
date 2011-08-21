@@ -20,4 +20,8 @@ public class University extends DatastoreEntity {
 		address = jObj.getString("address");
 		termsPerYear = jObj.getInt("termsPerYear");
 	}
+	
+	public String getAPIPath() {
+		return "/api/nope";
+	}
 }

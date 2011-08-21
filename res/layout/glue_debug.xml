@@ -2,30 +2,33 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="fill_parent" android:layout_height="fill_parent"
 	android:weightSum="1" android:orientation="vertical">
-	<TextView android:id="@+id/header" android:layout_height="wrap_content"
-		android:text="Hello, World!" android:textAppearance="?android:attr/textAppearanceLarge"
-		android:layout_width="match_parent"></TextView>
+	<TextView android:id="@+id/header" android:text="Hello, World!" android:textAppearance="?android:attr/textAppearanceLarge"
+		android:layout_width="match_parent" android:layout_height="wrap_content"></TextView>
 	<Button android:id="@+id/button1" android:text="Update University in Profile"
-		android:layout_height="wrap_content" android:layout_width="match_parent"
-		android:onClick="onProfileUpdateButtonClick"></Button>
+		android:layout_width="match_parent"
+		android:onClick="onProfileUpdateButtonClick" android:layout_height="0dp" android:layout_weight="0.14"></Button>
 
-	<Button android:id="@+id/button2" android:text="GET /api/university"
-		android:layout_height="wrap_content" android:layout_width="match_parent"
-		android:onClick="onYeahButtonClick"></Button>
+	<Button android:id="@+id/button2" android:text="Update current schedule"
+		android:layout_width="match_parent"
+		android:onClick="onYeahButtonClick" android:layout_height="0dp" android:layout_weight="0.14"></Button>
 
 	<Button android:id="@+id/button3" android:text="POST /api/profile"
-		android:layout_height="wrap_content" android:layout_width="match_parent"
-		android:onClick="onProfilePostButtonClick"></Button>
+		android:layout_width="match_parent"
+		android:onClick="onProfilePostButtonClick" android:layout_height="0dp" android:layout_weight="0.14"></Button>
 
 	<Button android:id="@+id/button4" android:text="GET /api/profile"
-		android:layout_height="wrap_content" android:layout_width="match_parent"
-		android:onClick="onProfileGetButtonClick"></Button>
+		android:layout_width="match_parent"
+		android:onClick="onProfileGetButtonClick" android:layout_height="0dp" android:layout_weight="0.14"></Button>
 
 	<Button android:id="@+id/button5" android:text="GET /api/schedule/current"
-		android:layout_height="wrap_content" android:layout_width="match_parent"
-		android:onClick="onCurSchedButtonClick"></Button>
+		android:layout_width="match_parent"
+		android:onClick="onCurSchedButtonClick" android:layout_height="0dp" android:layout_weight="0.14"></Button>
 
-	<Button android:id="@+id/loginButton" android:text="Log In"
-		android:layout_height="wrap_content" android:layout_width="match_parent"
-		android:onClick="onLoginButtonClick"></Button>
+	<LinearLayout android:layout_width="match_parent"
+		android:id="@+id/connSettingsLayout" android:layout_height="0dp" android:layout_weight="0.14">
+		<Button android:id="@+id/changeServerButton" android:text="Change Server"
+			android:layout_height="wrap_content" android:onClick="onChangeServerButtonClick" android:layout_width="0dp" android:layout_weight="1"></Button>
+		<Button android:id="@+id/loginButton" android:text="Log In"
+			android:layout_height="wrap_content" android:onClick="onLoginButtonClick" android:layout_width="0dp" android:layout_weight="1"></Button>
+	</LinearLayout>
 </LinearLayout>

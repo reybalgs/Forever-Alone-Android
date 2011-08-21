@@ -3,10 +3,16 @@ package com.rdft.foreveralone.glue.models;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.rdft.foreveralone.glue.CommHandler;
+import com.rdft.foreveralone.glue.CommHandler.ISendable;
 import com.rdft.foreveralone.glue.debug.DebugConfig;
 
 public class DatastoreEntity {
 	private String entityKey;
+	
+	public String getAPIPath() {
+		return "/api/nope";
+	}
 	
 	public DatastoreEntity() {
 		

@@ -1,27 +1,23 @@
 package com.rdft.foreveralone.glue.debug;
 
-import com.rdft.foreveralone.R;
-import com.rdft.foreveralone.glue.CommHandler;
-import com.rdft.foreveralone.glue.GlueService;
-import com.rdft.foreveralone.glue.GlueService.LocalBinder;
-import com.rdft.foreveralone.glue.models.University;
-
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONException;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 import com.rdft.foreveralone.R;
 import com.rdft.foreveralone.glue.CommHandler;
-import com.rdft.foreveralone.glue.GlueService;
+import com.rdft.foreveralone.glue.FaHttpClient;
 import com.rdft.foreveralone.glue.auth.LoginTask;
 import com.rdft.foreveralone.glue.auth.LoginTask.ILoginReceiver;
-import com.rdft.foreveralone.glue.models.*;
+import com.rdft.foreveralone.glue.models.Course;
+import com.rdft.foreveralone.glue.models.Schedule;
+import com.rdft.foreveralone.glue.models.Section;
+import com.rdft.foreveralone.glue.models.University;
+import com.rdft.foreveralone.glue.models.UserProfile;
 
 public class GlueLayerDebugActivity extends Activity implements ILoginReceiver {
 	String TAG = "GlueDebug";
@@ -65,7 +61,7 @@ public class GlueLayerDebugActivity extends Activity implements ILoginReceiver {
 
 			profile = comm.getProfile();
 			profile.university = universities[0];
-			comm.updateProfile(profile);
+			comm.update(profile);
 			DebugConfig.logInfo(TAG, "Setting university to \""
 					+ universities[0].name + "\"");
 		} catch (JSONException e) {
@@ -81,23 +77,33 @@ public class GlueLayerDebugActivity extends Activity implements ILoginReceiver {
 			t.show();
 			return;
 		}
-		University[] unis;
 
 		try {
-			unis = comm.getUniversities();
+			Schedule schedule = comm.getCurrentSchedule();
+			if (schedule == null) {
+				DebugConfig.logInfo(TAG,
+						"You do not have a current schedule set");
+				Toast.makeText(this, "You do not have a current schedule set",
+						Toast.LENGTH_SHORT).show();
+				return;
+			}
+			Course[] courses = comm.getCourses();
+			if (courses.length == 0) {
+				Toast.makeText(this, "Add a course first", Toast.LENGTH_SHORT)
+						.show();
+				return;
+			}
+			
+			Section[] sections = comm.getSections();
+			schedule.addClass(sections[0]);
+			comm.update(schedule);
 		} catch (JSONException e) {
 			e.printStackTrace();
-			showConnectionError();
-			return;
 		}
+	}
 
-		Toast t = Toast.makeText(this, "Successfully retrieved "
-				+ new Integer(unis.length).toString() + " universities",
-				Toast.LENGTH_SHORT);
-		t.show();
-		for (University uni : unis) {
-			DebugConfig.logInfo(TAG, uni.name + " - " + uni.getEntityKey());
-		}
+	public void onChangeServerButtonClick(View v) {
+
 	}
 
 	public void onLoginButtonClick(View v) {
@@ -106,10 +112,11 @@ public class GlueLayerDebugActivity extends Activity implements ILoginReceiver {
 	}
 
 	@Override
-	public void onLoginComplete(DefaultHttpClient client) {
+	public void onLoginComplete(FaHttpClient client) {
 		if (client != null) {
-			this.comm = new CommHandler(client);
-			Toast.makeText(this, "You are now logged in", Toast.LENGTH_SHORT).show();
+			this.comm = new CommHandler((FaHttpClient) client);
+			Toast.makeText(this, "You are now logged in", Toast.LENGTH_SHORT)
+					.show();
 		} else {
 			Toast.makeText(this, "Login failed", Toast.LENGTH_SHORT).show();
 		}
@@ -156,8 +163,14 @@ public class GlueLayerDebugActivity extends Activity implements ILoginReceiver {
 		Schedule schedule;
 		try {
 			schedule = comm.getCurrentSchedule();
-			Toast.makeText(this, "Got schedule with " + schedule.classes.size()
-					+ " classes", Toast.LENGTH_LONG);
+			if (schedule != null) {
+				Toast.makeText(this,
+						"Got schedule with " + schedule.classes.size()
+								+ " classes", Toast.LENGTH_LONG);
+			} else {
+				Toast.makeText(this, "You do not have a current schedule set.",
+						Toast.LENGTH_LONG).show();
+			}
 		} catch (JSONException e) {
 			DebugConfig.logError(TAG, "Failed to parse current schedule JSON");
 			e.printStackTrace();

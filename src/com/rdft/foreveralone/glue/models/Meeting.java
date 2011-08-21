@@ -21,6 +21,10 @@ public class Meeting extends DatastoreEntity {
 	int days;
 	Date startTime;
 	Date endTime;
+	
+	public String getAPIPath() {
+		return "/api/meeting";
+	}
 
 	private Date jsonToDate(JSONObject jTime) {
 		Date time = new Date();
@@ -31,6 +35,7 @@ public class Meeting extends DatastoreEntity {
 		} catch (JSONException e) {
 			DebugConfig.logError("Meeting-TimeConversion", "Failed to convert JSON to time!");
 			e.printStackTrace();
+			time = null;
 		}
 
 		return time;
@@ -50,6 +55,7 @@ public class Meeting extends DatastoreEntity {
 	@Override
 	public JSONObject toJSONObject() throws JSONException {
 		JSONObject jObj = new JSONObject();
+		jObj.put("entityKey", getEntityKey());
 		jObj.put("section", section);
 
 		jObj.put("isSpecificDay", isSpecificDay);
