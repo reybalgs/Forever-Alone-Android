@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.rdft.foreveralone.R;
 import com.rdft.foreveralone.glue.models.Course;
+import com.rdft.foreveralone.glue.models.Section;
 
 import android.app.ListActivity;
 import android.content.Intent;
@@ -24,16 +25,16 @@ public class You extends ListActivity {
 	*/
 	// Just an intent for invoking subactivities
 	Intent intention;
-	private ArrayList<Course> m_courses = null;
-	private YouCourseAdapter m_adapter;
+	private ArrayList<Section> m_sections = null;
+	private YouSectionAdapter m_adapter;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
-        m_courses = new ArrayList<Course>();
-        m_courses.add(DummyValues.fakeCourse);
-        this.m_adapter = new YouCourseAdapter(this, R.layout.you, m_courses);
+        m_sections = new ArrayList<Section>();
+        m_sections.add(DummyValues.fakeSection);
+        this.m_adapter = new YouSectionAdapter(this, R.layout.you, m_sections);
         setListAdapter(this.m_adapter);
 
         ListView lv = getListView();
