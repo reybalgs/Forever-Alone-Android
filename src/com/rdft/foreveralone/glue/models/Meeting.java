@@ -36,6 +36,24 @@ public class Meeting extends DatastoreEntity {
 	public String getAPIPath() {
 		return "/api/meeting";
 	}
+	
+	/**
+	 * Forever Alone uses a bit-field to store the days in which a Meeting
+	 * will be held. To determine whether this includes a particular day,
+	 * use:
+	 * <br><br>
+	 * <code>
+	 * int n = meeting.getRawDays() & Day.FRI;<br>
+	 * if (n != 0) {<br>
+	 * 		// There's a meeting on Fridays<br>
+	 * }<br>
+	 * </code><br>
+	 * 
+	 * @return Days in which this meeting applies to, as a bit-field
+	 */
+	public int getRawDays() {
+		return days;
+	}
 
 	private Date jsonToDate(JSONObject jTime) {
 		Date time = new Date();

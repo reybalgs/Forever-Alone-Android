@@ -122,12 +122,4 @@ public class CommHandler {
 		}
 		http.postJSON(path, jsonObj);
 	}
-
-	public interface ISendable {
-		public void onPut(CommHandler handler);
-
-		public void onPost(CommHandler handler);
-
-		public void onDelete(CommHandler handler);
-	}
 }

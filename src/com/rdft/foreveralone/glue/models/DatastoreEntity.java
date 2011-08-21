@@ -3,8 +3,6 @@ package com.rdft.foreveralone.glue.models;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.rdft.foreveralone.glue.CommHandler;
-import com.rdft.foreveralone.glue.CommHandler.ISendable;
 import com.rdft.foreveralone.glue.debug.DebugConfig;
 
 public class DatastoreEntity {
@@ -40,7 +38,12 @@ public class DatastoreEntity {
 	}
 
 	protected void setEntityKey(String entityKey) {
-		// Don't allow the entity key to be modified if we already have one
+		/* 
+		 * The entity key is the App Engine datastore's identifier for
+		 * instances of an object.
+		 * 
+		 * Don't allow the entity key to be modified if we already have one.
+		 */
 		if (this.entityKey == null) {
 			this.entityKey = entityKey;
 		} else {
