@@ -21,6 +21,13 @@ import android.os.Bundle;
 import com.rdft.foreveralone.glue.FaHttpClient;
 import com.rdft.foreveralone.glue.debug.DebugConfig;
 
+/**
+ * LoginTask attempts to create a FaHttpClient which is authenticated
+ * to the server as the user.
+ * 
+ * @author lugkhast
+ *
+ */
 public class LoginTask extends AsyncTask<Void, Void, FaHttpClient> {
 	Activity parent;
 	DefaultHttpClient authenticatedClient;

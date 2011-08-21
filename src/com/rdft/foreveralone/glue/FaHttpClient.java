@@ -76,7 +76,7 @@ public class FaHttpClient extends DefaultHttpClient {
 			end = System.currentTimeMillis();
 			DebugConfig
 					.logInfo(TAG, "HTTP GET took [" + (end - start) + "] ms");
-			jsonObj = JSONParser.getObject(response);
+			jsonObj = JSONReader.getObject(response);
 		} catch (IOException e) {
 			DebugConfig.logError(TAG, "I/O error in HTTP GET");
 			e.printStackTrace();
@@ -96,7 +96,7 @@ public class FaHttpClient extends DefaultHttpClient {
 			end = System.currentTimeMillis();
 			DebugConfig
 					.logInfo(TAG, "HTTP GET took [" + (end - start) + "] ms");
-			jsonArray = JSONParser.getArray(response);
+			jsonArray = JSONReader.getArray(response);
 		} catch (IOException e) {
 			DebugConfig.logError(TAG, "I/O error in HTTP GET");
 			e.printStackTrace();

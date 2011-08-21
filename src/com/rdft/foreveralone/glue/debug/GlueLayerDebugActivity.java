@@ -27,7 +27,6 @@ public class GlueLayerDebugActivity extends Activity implements ILoginReceiver {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.glue_debug);
-		// comm = new CommHandler();
 
 		Toast t = Toast.makeText(this, "Server address is "
 				+ DebugConfig.address, Toast.LENGTH_LONG);
@@ -38,35 +37,6 @@ public class GlueLayerDebugActivity extends Activity implements ILoginReceiver {
 		Toast toast = Toast.makeText(this,
 				"Unable to connect - try again later", Toast.LENGTH_SHORT);
 		toast.show();
-	}
-
-	public void onProfileUpdateButtonClick(View v) {
-		if (comm == null) {
-			Toast t = Toast.makeText(this, "Not yet logged in",
-					Toast.LENGTH_SHORT);
-			t.show();
-			return;
-		}
-
-		University[] universities;
-		UserProfile profile;
-		try {
-			universities = comm.getUniversities();
-
-			if (universities.length == 0) {
-				Toast.makeText(this, "Add a university first",
-						Toast.LENGTH_SHORT);
-				return;
-			}
-
-			profile = comm.getProfile();
-			profile.university = universities[0];
-			comm.update(profile);
-			DebugConfig.logInfo(TAG, "Setting university to \""
-					+ universities[0].name + "\"");
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
 	}
 
 	public void onYeahButtonClick(View v) {
@@ -122,36 +92,6 @@ public class GlueLayerDebugActivity extends Activity implements ILoginReceiver {
 		}
 	}
 
-	public void onProfilePostButtonClick(View v) {
-		if (comm == null) {
-			Toast t = Toast.makeText(this, "Not yet logged in",
-					Toast.LENGTH_SHORT);
-			t.show();
-			return;
-		}
-
-		comm.createDefaultProfile();
-	}
-
-	public void onProfileGetButtonClick(View v) {
-		if (comm == null) {
-			Toast t = Toast.makeText(this, "Not yet logged in",
-					Toast.LENGTH_SHORT);
-			t.show();
-			return;
-		}
-
-		UserProfile profile;
-		try {
-			profile = comm.getProfile();
-		} catch (JSONException e) {
-			e.printStackTrace();
-			Toast.makeText(this, "Failed to retrieve profile",
-					Toast.LENGTH_SHORT).show();
-			return;
-		}
-	}
-
 	public void onCurSchedButtonClick(View v) {
 		if (comm == null) {
 			Toast t = Toast.makeText(this, "Not yet logged in",
@@ -173,6 +113,22 @@ public class GlueLayerDebugActivity extends Activity implements ILoginReceiver {
 			}
 		} catch (JSONException e) {
 			DebugConfig.logError(TAG, "Failed to parse current schedule JSON");
+			e.printStackTrace();
+		}
+	}
+	
+	public void onCreateCourseButtonClick(View v) {
+		if (comm == null) {
+			Toast t = Toast.makeText(this, "Not yet logged in",
+					Toast.LENGTH_SHORT);
+			t.show();
+			return;
+		}
+		
+		Course course = new Course();
+		try {
+			comm.update(course);
+		} catch (JSONException e) {
 			e.printStackTrace();
 		}
 	}

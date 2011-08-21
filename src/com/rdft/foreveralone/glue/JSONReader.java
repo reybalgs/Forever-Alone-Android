@@ -16,7 +16,7 @@ import org.json.JSONObject;
 import com.rdft.foreveralone.glue.debug.DebugConfig;
 
 
-public class JSONParser {
+public class JSONReader {
 	private static String TAG = "JSONParser";
 	
 	private static String convertStreamToString(InputStream is) {

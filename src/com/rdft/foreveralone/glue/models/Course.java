@@ -8,10 +8,20 @@ public class Course extends DatastoreEntity {
 	public String description;
 	public University university;
 	
+	public Course() {
+		courseCode = "BALIWAN";
+		description = "Hats, hats everywhere";
+	}
+	
 	public Course(JSONObject jObj) throws JSONException {
 		super(jObj);
 		courseCode = jObj.getString("courseCode");
 		description = jObj.getString("description");
+	}
+	
+	@Override
+	public String getAPIPath() {
+		return "/api/course";
 	}
 	
 	@Override
