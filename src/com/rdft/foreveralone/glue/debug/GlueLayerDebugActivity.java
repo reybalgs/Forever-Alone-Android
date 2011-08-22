@@ -78,7 +78,7 @@ public class GlueLayerDebugActivity extends Activity implements ILoginReceiver {
 
 	public void onLoginButtonClick(View v) {
 		LoginTask task = new LoginTask(this);
-		task.execute(null);
+		task.execute((Void[]) null);
 	}
 
 	@Override
@@ -144,9 +144,8 @@ public class GlueLayerDebugActivity extends Activity implements ILoginReceiver {
 		University uni = new University();
 		uni.name = "Hello World University";
 		DatastoreEntity entity = uni;
-		String key;
 		try {
-			key = comm.update(entity);
+			comm.update(entity);
 			DebugConfig.logInfo(TAG, "Entity key after update: " + entity.getEntityKey());
 			UserProfile profile = comm.getProfile();
 			if (profile == null) {
