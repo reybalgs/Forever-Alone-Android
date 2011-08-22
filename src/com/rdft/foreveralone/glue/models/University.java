@@ -21,7 +21,17 @@ public class University extends DatastoreEntity {
 		termsPerYear = jObj.getInt("termsPerYear");
 	}
 	
+	public JSONObject toJSONObject() throws JSONException {
+		JSONObject jObj = new JSONObject();
+		jObj.put("entityKey", getEntityKey());
+		jObj.put("name", name);
+		jObj.put("address", address);
+		jObj.put("termsPerYear", termsPerYear);
+		
+		return jObj;
+	}
+	
 	public String getAPIPath() {
-		return "/api/nope";
+		return "/api/university";
 	}
 }

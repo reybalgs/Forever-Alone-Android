@@ -1,6 +1,5 @@
 package com.rdft.foreveralone.glue.debug;
 
-import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONException;
 
 import android.app.Activity;
@@ -14,10 +13,10 @@ import com.rdft.foreveralone.glue.FaHttpClient;
 import com.rdft.foreveralone.glue.auth.LoginTask;
 import com.rdft.foreveralone.glue.auth.LoginTask.ILoginReceiver;
 import com.rdft.foreveralone.glue.models.Course;
+import com.rdft.foreveralone.glue.models.DatastoreEntity;
 import com.rdft.foreveralone.glue.models.Schedule;
 import com.rdft.foreveralone.glue.models.Section;
 import com.rdft.foreveralone.glue.models.University;
-import com.rdft.foreveralone.glue.models.UserProfile;
 
 public class GlueLayerDebugActivity extends Activity implements ILoginReceiver {
 	String TAG = "GlueDebug";
@@ -116,7 +115,7 @@ public class GlueLayerDebugActivity extends Activity implements ILoginReceiver {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void onCreateCourseButtonClick(View v) {
 		if (comm == null) {
 			Toast t = Toast.makeText(this, "Not yet logged in",
@@ -124,12 +123,31 @@ public class GlueLayerDebugActivity extends Activity implements ILoginReceiver {
 			t.show();
 			return;
 		}
-		
+
 		Course course = new Course();
 		try {
 			comm.update(course);
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public void onFullTestButtonClick(View v) {
+		if (comm == null) {
+			Toast t = Toast.makeText(this, "Not yet logged in",
+					Toast.LENGTH_SHORT);
+			t.show();
+			return;
+		}
+
+		DatastoreEntity entity = new University();
+		String key;
+		try {
+			key = comm.update(entity);
+			DebugConfig.logInfo(TAG, "Entity key after update: " + entity.getEntityKey());
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		
 	}
 }

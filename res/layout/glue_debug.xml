@@ -5,9 +5,6 @@
 	<TextView android:id="@+id/header" android:text="Hello, World!"
 		android:textAppearance="?android:attr/textAppearanceLarge"
 		android:layout_width="match_parent" android:layout_height="wrap_content"></TextView>
-	<Button android:id="@+id/updateUniButton" android:text="Update University in Profile"
-		android:layout_width="match_parent" android:onClick="onProfileUpdateButtonClick"
-		android:layout_height="0dp" android:layout_weight="0.14"></Button>
 
 	<Button android:id="@+id/updateCurrentScheduleButton"
 		android:text="Update current schedule" android:layout_width="match_parent"
@@ -20,6 +17,10 @@
 
 	<Button android:id="@+id/createCourseButton" android:text="Create Course"
 		android:layout_width="match_parent" android:onClick="onCreateCourseButtonClick"
+		android:layout_height="0dp" android:layout_weight="0.14"></Button>
+		
+	<Button android:id="@+id/fullTestButton" android:text="Full Entity Testing"
+		android:layout_width="match_parent" android:onClick="onFullTestButtonClick"
 		android:layout_height="0dp" android:layout_weight="0.14"></Button>
 
 	<LinearLayout android:layout_width="match_parent"

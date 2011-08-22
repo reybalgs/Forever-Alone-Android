@@ -7,19 +7,20 @@ import com.rdft.foreveralone.glue.debug.DebugConfig;
 
 public class DatastoreEntity {
 	private String entityKey;
-	
+	private String TAG = "DatastoreEntity";
+
 	public String getAPIPath() {
 		return "/api/nope";
 	}
-	
+
 	public DatastoreEntity() {
-		
+
 	}
-	
+
 	public DatastoreEntity(JSONObject jObj) throws JSONException {
 		setEntityKey(jObj.getString("entityKey"));
 	}
-	
+
 	protected JSONObject safeGet(JSONObject jObj, String key) {
 		try {
 			return jObj.getJSONObject(key);
@@ -27,9 +28,10 @@ public class DatastoreEntity {
 			return null;
 		}
 	}
-	
+
 	public JSONObject toJSONObject() throws JSONException {
-		DebugConfig.logError("DatastoreEntity", "CRITICAL - Unimplemented toJSONObject!");
+		DebugConfig.logError("DatastoreEntity",
+				"CRITICAL - Unimplemented toJSONObject!");
 		throw new Error();
 	}
 
@@ -37,22 +39,16 @@ public class DatastoreEntity {
 		return entityKey;
 	}
 
-	protected void setEntityKey(String entityKey) {
-		/* 
-		 * The entity key is the App Engine datastore's identifier for
-		 * instances of an object.
+	public void setEntityKey(String entityKey) {
+		/*
+		 * The entity key is the App Engine datastore's identifier for instances
+		 * of an object.
 		 * 
 		 * Don't allow the entity key to be modified if we already have one.
 		 */
-		if (this.entityKey == null) {
-			this.entityKey = entityKey;
-		} else {
-			EntityKeyModificationError up = new EntityKeyModificationError();
-			throw up;
+		if (this.entityKey != null) {
+			DebugConfig.logInfo(TAG, "WARNING: Replacing an existing entity key!");
 		}
-	}
-	
-	public class EntityKeyModificationError extends Error {
-		private static final long serialVersionUID = 4438270464200017874L;
+		this.entityKey = entityKey;
 	}
 }

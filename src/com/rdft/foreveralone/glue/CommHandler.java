@@ -109,17 +109,19 @@ public class CommHandler {
 		return schedule;
 	}
 
-	public void update(DatastoreEntity thing) throws JSONException {
+	public String update(DatastoreEntity thing) throws JSONException {
 		JSONObject jsonObj = thing.toJSONObject();
 		String path = thing.getAPIPath();
+		String entityKey;
 
 		DebugConfig.logInfo(TAG, "SENDING JSON: " + jsonObj.toString());
 
 		if (thing.getEntityKey() == null) {
-			DebugConfig
-					.logInfo(TAG,
+			DebugConfig.logInfo(TAG,
 							"NOTE: Object has no entity key");
 		}
-		http.postJSON(path, jsonObj);
+		entityKey = http.postJSON(path, jsonObj);
+		thing.setEntityKey(entityKey);
+		return entityKey;
 	}
 }

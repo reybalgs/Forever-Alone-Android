@@ -5,6 +5,7 @@ import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
@@ -13,6 +14,7 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -32,7 +34,7 @@ public class FaHttpClient extends DefaultHttpClient {
 		}
 	}
 
-	public void postJSON(String url, JSONObject jObj) {
+	public String postJSON(String url, JSONObject jObj) {
 		try {
 			DebugConfig.logInfo(TAG, "POSTing JSON to " + url);
 			HttpPost request = new HttpPost(DebugConfig.getURL(url));
@@ -40,13 +42,20 @@ public class FaHttpClient extends DefaultHttpClient {
 			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
 			nameValuePairs.add(new BasicNameValuePair("json", jObj.toString()));
 			request.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-			this.execute(request);
+			HttpResponse response = this.execute(request);
+			HttpEntity resEntity = response.getEntity();
+			String entityKey = EntityUtils.toString(resEntity);
+			if (resEntity != null) {
+				DebugConfig.logInfo(TAG, "This should be an entity key: " + entityKey);
+				return entityKey;
+			}
 		} catch (IOException e) {
 			DebugConfig.logError(TAG, "I/O error in HTTP POST");
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return null;
 	}
 	
 	public void putJSON(String url, JSONObject jObj) {
