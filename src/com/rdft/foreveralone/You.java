@@ -141,7 +141,8 @@ public class You extends ListActivity {
 			startActivity(intention);
 			break;
 		case R.id.edityouicon:
-			Toast.makeText(this, "Edit icon selected", Toast.LENGTH_LONG).show();
+			intention = new Intent(this, AddProfile.class);
+			startActivity(intention);
 			break;
 		case R.id.refreshyouicon:
 			Toast.makeText(this, "Refreshing...", Toast.LENGTH_LONG).show();

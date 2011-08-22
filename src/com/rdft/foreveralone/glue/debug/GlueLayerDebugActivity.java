@@ -71,7 +71,7 @@ public class GlueLayerDebugActivity extends Activity implements ILoginReceiver {
 	}
 
 	public void onChangeServerButtonClick(View v) {
-
+		
 	}
 
 	public void onLoginButtonClick(View v) {

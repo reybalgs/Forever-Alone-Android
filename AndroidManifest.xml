@@ -8,12 +8,13 @@
 	<uses-permission android:name="android.permission.MANAGE_ACCOUNTS"></uses-permission>
 
 	<application android:label="@string/app_name" android:icon="@drawable/forever_alone_iconv2">
-		<activity android:name=".glue.debug.GlueLayerDebugActivity"
-			android:label="@string/app_name" android:theme="@android:style/Theme.NoTitleBar">
+		<activity android:name=".Menu">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN"></action>
 				<category android:name="android.intent.category.LAUNCHER"></category>
 			</intent-filter>
+		</activity><activity android:name=".glue.debug.GlueLayerDebugActivity"
+			android:label="@string/app_name" android:theme="@android:style/Theme.NoTitleBar">
 		</activity>
 		<activity android:name=".glue.debug.GlueLayerDebugActivity"
 			android:label="Forever Alone Glue Debugging">
@@ -26,6 +27,10 @@
 
 		<activity android:name=".glue.auth.AccountList"></activity>
 		<activity android:name=".glue.debug.GlueLayerDebugActivity"></activity>
+		<activity android:name=".AddCourse"></activity>
+		
+		<activity android:name=".Splash"></activity>
+		<activity android:name=".AddProfile"></activity>
 
 
 	</application>
