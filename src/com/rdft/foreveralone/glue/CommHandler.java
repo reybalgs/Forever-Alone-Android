@@ -113,6 +113,11 @@ public class CommHandler {
 		JSONObject jsonObj = thing.toJSONObject();
 		String path = thing.getAPIPath();
 		String entityKey;
+		
+		if (!thing.isSendable()) {
+			DebugConfig.logWarning(TAG, "Object reports that it is not ready for sending!");
+			DebugConfig.logWarning(TAG, "(sending anyway)");
+		}
 
 		DebugConfig.logInfo(TAG, "SENDING JSON: " + jsonObj.toString());
 

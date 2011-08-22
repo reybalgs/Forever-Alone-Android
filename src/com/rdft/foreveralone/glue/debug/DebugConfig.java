@@ -24,4 +24,8 @@ public class DebugConfig {
 	public static void logInfo(String tag, String message) {
 		Log.i(TAG + "-" + tag, message);
 	}
+	
+	public static void logWarning(String tag, String message) {
+		Log.w(tag, message);
+	}
 }

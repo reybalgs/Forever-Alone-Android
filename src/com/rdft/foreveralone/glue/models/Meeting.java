@@ -21,27 +21,26 @@ public class Meeting extends DatastoreEntity {
 	int days;
 	Date startTime;
 	Date endTime;
-	
+
 	public Meeting(JSONObject jObj) throws JSONException {
 		super(jObj);
 		days = jObj.getInt("days");
 
 		JSONObject jStart = jObj.getJSONObject("startTime");
 		startTime = jsonToDate(jStart);
-		
+
 		JSONObject jEnd = jObj.getJSONObject("endTime");
 		endTime = jsonToDate(jEnd);
 	}
-	
+
 	public String getAPIPath() {
 		return "/api/meeting";
 	}
-	
+
 	/**
-	 * Forever Alone uses a bit-field to store the days in which a Meeting
-	 * will be held. To determine whether this includes a particular day,
-	 * use:
-	 * <br><br>
+	 * Forever Alone uses a bit-field to store the days in which a Meeting will
+	 * be held. To determine whether this includes a particular day, use: <br>
+	 * <br>
 	 * <code>
 	 * int n = meeting.getRawDays() & Day.FRI;<br>
 	 * if (n != 0) {<br>
@@ -62,7 +61,8 @@ public class Meeting extends DatastoreEntity {
 			time.setHours(jTime.getInt("hour"));
 			time.setMinutes(jTime.getInt("minute"));
 		} catch (JSONException e) {
-			DebugConfig.logError("Meeting-TimeConversion", "Failed to convert JSON to time!");
+			DebugConfig.logError("Meeting-TimeConversion",
+					"Failed to convert JSON to time!");
 			e.printStackTrace();
 			time = null;
 		}
@@ -84,5 +84,12 @@ public class Meeting extends DatastoreEntity {
 		jObj.put("endTime", endTime);
 
 		return jObj;
+	}
+
+	@Override
+	public boolean isSendable() {
+		if ((startTime == null) || (endTime == null)) 
+			return false;
+		return true;
 	}
 }

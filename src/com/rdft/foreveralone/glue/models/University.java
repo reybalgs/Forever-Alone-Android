@@ -31,6 +31,12 @@ public class University extends DatastoreEntity {
 		return jObj;
 	}
 	
+	public boolean isSendable() {
+		if ((name == null) || (address == null) || (termsPerYear <= 0))
+			return false;
+		return true;
+	}
+	
 	public String getAPIPath() {
 		return "/api/university";
 	}

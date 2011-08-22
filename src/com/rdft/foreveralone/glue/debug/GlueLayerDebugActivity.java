@@ -16,8 +16,6 @@ import com.rdft.foreveralone.glue.models.Course;
 import com.rdft.foreveralone.glue.models.DatastoreEntity;
 import com.rdft.foreveralone.glue.models.Schedule;
 import com.rdft.foreveralone.glue.models.Section;
-import com.rdft.foreveralone.glue.models.University;
-import com.rdft.foreveralone.glue.models.UserProfile;
 
 public class GlueLayerDebugActivity extends Activity implements ILoginReceiver {
 	String TAG = "GlueDebug";
@@ -81,7 +79,6 @@ public class GlueLayerDebugActivity extends Activity implements ILoginReceiver {
 		task.execute((Void[]) null);
 	}
 
-	@Override
 	public void onLoginComplete(FaHttpClient client) {
 		if (client != null) {
 			this.comm = new CommHandler((FaHttpClient) client);
@@ -141,19 +138,11 @@ public class GlueLayerDebugActivity extends Activity implements ILoginReceiver {
 			return;
 		}
 
-		University uni = new University();
-		uni.name = "Hello World University";
-		DatastoreEntity entity = uni;
+		Course course = new Course();
+		DatastoreEntity entity = course;
 		try {
 			comm.update(entity);
 			DebugConfig.logInfo(TAG, "Entity key after update: " + entity.getEntityKey());
-			UserProfile profile = comm.getProfile();
-			if (profile == null) {
-				DebugConfig.logError(TAG, "Failed to retrieve profile!");
-				return;
-			}
-			profile.university = uni;
-			comm.update(profile);
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
