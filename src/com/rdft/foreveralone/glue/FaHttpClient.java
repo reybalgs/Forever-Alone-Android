@@ -22,6 +22,7 @@ import com.rdft.foreveralone.glue.debug.DebugConfig;
 
 public class FaHttpClient extends DefaultHttpClient {
 	String TAG = "FaHttpClient";
+
 	public void post(String url) {
 		try {
 			HttpPost request = new HttpPost(new URI(url));
@@ -38,15 +39,23 @@ public class FaHttpClient extends DefaultHttpClient {
 		try {
 			DebugConfig.logInfo(TAG, "POSTing JSON to " + url);
 			HttpPost request = new HttpPost(DebugConfig.getURL(url));
+			long start, end;
+			start = System.currentTimeMillis();
 
 			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
 			nameValuePairs.add(new BasicNameValuePair("json", jObj.toString()));
 			request.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 			HttpResponse response = this.execute(request);
+
+			end = System.currentTimeMillis();
+			DebugConfig
+					.logInfo(TAG, "HTTP POST took [" + (end - start) + "] ms");
+
 			HttpEntity resEntity = response.getEntity();
 			String entityKey = EntityUtils.toString(resEntity);
 			if (resEntity != null) {
-				DebugConfig.logInfo(TAG, "This should be an entity key: " + entityKey);
+				DebugConfig.logInfo(TAG, "This should be an entity key: "
+						+ entityKey);
 				return entityKey;
 			}
 		} catch (IOException e) {
@@ -57,7 +66,7 @@ public class FaHttpClient extends DefaultHttpClient {
 		}
 		return null;
 	}
-	
+
 	public void putJSON(String url, JSONObject jObj) {
 		try {
 			DebugConfig.logInfo(TAG, "PUTting JSON to " + url);
