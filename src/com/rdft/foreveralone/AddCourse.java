@@ -21,7 +21,7 @@ public class AddCourse extends Activity
 		setContentView(R.layout.addcourse); // the layout
 		
 		// Button's listener
-		final Button createCourseButton = (Button)findViewById(R.id.addcoursecreatebutton);
+		final Button createCourseButton = (Button)findViewById(R.id.addcoursebutton);
 		createCourseButton.setOnClickListener(new OnClickListener() 
 		{
 			

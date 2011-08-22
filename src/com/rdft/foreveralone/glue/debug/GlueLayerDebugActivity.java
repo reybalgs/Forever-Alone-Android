@@ -73,7 +73,7 @@ public class GlueLayerDebugActivity extends Activity implements ILoginReceiver {
 	}
 
 	public void onChangeServerButtonClick(View v) {
-
+		
 	}
 
 	public void onLoginButtonClick(View v) {
@@ -81,7 +81,6 @@ public class GlueLayerDebugActivity extends Activity implements ILoginReceiver {
 		task.execute((Void[]) null);
 	}
 
-	@Override
 	public void onLoginComplete(FaHttpClient client) {
 		if (client != null) {
 			this.comm = new CommHandler((FaHttpClient) client);

@@ -49,7 +49,7 @@
 		android:layout_centerHorizontal="true"
     	android:onClick="onClick"/>
     <Button
-    	android:id="@+id/addcoursecreatebutton"
+    	android:id="@+id/addcoursebutton"
     	android:text="Create course"
     	android:layout_height="wrap_content"
      	android:layout_width="wrap_content"
