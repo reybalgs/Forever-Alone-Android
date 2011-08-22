@@ -10,6 +10,8 @@ import com.rdft.foreveralone.R;
 public class Menu extends TabActivity {
     /** Called when the activity is first created. */
 	
+	
+	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,5 +44,7 @@ public class Menu extends TabActivity {
         tabHost.addTab(spec);
 
         tabHost.setCurrentTab(0);
+        
+
     }
 }

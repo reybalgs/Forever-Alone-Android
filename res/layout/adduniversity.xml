@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:orientation="vertical"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent">
+    <TextView 
+    	android:layout_height="wrap_content" 
+    	android:text="Add a University/College" 
+    	android:textAppearance="?android:attr/textAppearanceLarge" 
+    	android:layout_width="wrap_content" 
+    	android:id="@+id/textView1">
+    </TextView>
+    <TextView 
+    	android:text="Don't see your university or college? Add it here!" 
+    	android:id="@+id/textView2" 
+    	android:layout_width="wrap_content" 
+    	android:layout_height="wrap_content">
+    </TextView>
+    <TextView 
+    	android:layout_height="wrap_content" 
+    	android:text="Name of your University:" 
+    	android:layout_marginTop="20dp"
+    	android:textAppearance="?android:attr/textAppearanceMedium" 
+    	android:layout_width="wrap_content" 
+    	android:id="@+id/textView3">
+    </TextView>
+    <TextView 
+    	android:text="The name of your university." 
+    	android:id="@+id/textView6" 
+    	android:layout_width="wrap_content" 
+    	android:layout_height="wrap_content">
+    </TextView>
+    <EditText 
+    	android:layout_height="wrap_content" 
+    	android:layout_width="match_parent" 
+    	android:id="@+id/editText1">
+        <requestFocus></requestFocus>
+    </EditText>
+    <TextView 
+    	android:layout_height="wrap_content" 
+    	android:text="Address of your University:" 
+    	android:textAppearance="?android:attr/textAppearanceMedium" 
+    	android:layout_width="wrap_content" 
+    	android:layout_marginTop="10dp"
+    	android:id="@+id/textView4">
+    </TextView>
+    <TextView 
+    	android:text="Where your university is located." 
+    	android:id="@+id/textView7" 
+    	android:layout_width="wrap_content"
+    	android:layout_height="wrap_content">
+    </TextView>
+    <EditText 
+    	android:layout_height="wrap_content" 
+    	android:layout_width="match_parent" 
+    	android:id="@+id/editText2">
+    </EditText>
+    <LinearLayout
+    	android:orientation="horizontal"
+  		android:layout_width="fill_parent"
+ 		android:layout_height="wrap_content"
+ 		android:layout_marginTop="10dp">
+	    <TextView 
+	    	android:layout_height="wrap_content"
+	    	android:layout_width="wrap_content"
+	    	android:text="Number of terms per year:" 
+	    	android:textAppearance="?android:attr/textAppearanceMedium" 
+	    	android:id="@+id/textView5">
+	    </TextView>
+	    <EditText 
+	    	android:layout_height="wrap_content"
+	    	android:layout_width="wrap_content" 
+	    	android:minEms="2"
+	    	android:layout_gravity="right"
+	    	android:id="@+id/editText3">
+	    </EditText>
+	</LinearLayout>
+    <Button 
+    	android:text="Done!" 
+    	android:id="@+id/submituniversity" 
+    	android:layout_width="fill_parent" 
+    	android:layout_height="wrap_content"
+    	android:layout_marginTop="20sp"
+    	android:layout_marginLeft="40sp"
+    	android:layout_marginRight="40sp"
+    	android:layout_gravity="center">
+	</Button>
+    
+</LinearLayout>

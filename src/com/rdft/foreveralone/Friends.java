@@ -47,9 +47,6 @@ public class Friends extends ListActivity {
 			intention = new Intent(this, AddFriends.class);
 			startActivity(intention);
 			break;
-		case R.id.editfriendsicon:
-			Toast.makeText(this, "Edit friends selected", Toast.LENGTH_LONG).show();
-			break;
 		case R.id.friendsrefresh:
 			Toast.makeText(this, "Refreshing...", Toast.LENGTH_LONG).show();
 			break;

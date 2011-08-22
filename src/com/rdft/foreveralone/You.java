@@ -140,10 +140,6 @@ public class You extends ListActivity {
 			intention = new Intent(this, AddCourse.class);
 			startActivity(intention);
 			break;
-		case R.id.edityouicon:
-			intention = new Intent(this, AddProfile.class);
-			startActivity(intention);
-			break;
 		case R.id.refreshyouicon:
 			Toast.makeText(this, "Refreshing...", Toast.LENGTH_LONG).show();
 			break;

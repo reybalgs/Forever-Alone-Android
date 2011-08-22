@@ -2,7 +2,6 @@
 <menu
   xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:title="Add a Friend" android:id="@+id/addfriendicon" android:icon="@drawable/ic_menu_invite"></item>
-    <item android:title="Edit Friends" android:id="@+id/editfriendsicon" android:icon="@drawable/ic_menu_friendslist"></item>
     <item android:title="Refresh" android:id="@+id/friendsrefresh" android:icon="@drawable/ic_menu_refresh"></item>
     <item android:title="Exit" android:id="@+id/friendsexit" android:icon="@drawable/ic_menu_close_clear_cancel"></item>
     
