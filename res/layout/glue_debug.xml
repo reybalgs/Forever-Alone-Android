@@ -1,36 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:layout_width="fill_parent" android:layout_height="fill_parent"
-	android:weightSum="1" android:orientation="vertical">
-	<TextView android:id="@+id/header" android:text="Hello, World!"
-		android:textAppearance="?android:attr/textAppearanceLarge"
-		android:layout_width="match_parent" android:layout_height="wrap_content"></TextView>
+<!-- ScrollView and horizontal rule from http://www.curious-creature.org/2010/08/15/scrollviews-handy-trick/ -->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/scroller" android:layout_width="fill_parent"
+	android:layout_height="fill_parent" android:fillViewport="true">
+	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		android:layout_width="fill_parent" android:layout_height="fill_parent"
+		android:weightSum="1" android:layout_weight="1.0" android:orientation="vertical">
+		<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+			android:layout_width="fill_parent" android:layout_height="fill_parent"
+			android:weightSum="1" android:layout_weight="1.0" android:padding="6dip"
+			android:orientation="vertical">
+			<TextView android:id="@+id/header" android:text="Network Code Testing"
+				android:textAppearance="?android:attr/textAppearanceLarge"
+				android:layout_width="match_parent" android:layout_height="wrap_content"></TextView>
 
-	<Button android:id="@+id/updateCurrentScheduleButton"
-		android:text="Update current schedule" android:layout_width="match_parent"
-		android:onClick="onYeahButtonClick" android:layout_height="0dp"
-		android:layout_weight="0.14"></Button>
+			<View android:layout_width="fill_parent" android:layout_height="1dip"
+				android:background="#ff106510" android:layout_marginLeft="6dip"
+				android:layout_marginRight="6dip" android:layout_marginTop="6dip"
+				android:layout_marginBottom="12dip" />
 
-	<Button android:id="@+id/getCurrentScheduleButton" android:text="GET /api/schedule/current"
-		android:layout_width="match_parent" android:onClick="onCurSchedButtonClick"
-		android:layout_height="0dp" android:layout_weight="0.14"></Button>
+			<Button android:id="@+id/updateCurrentScheduleButton"
+				android:text="Update current schedule" android:layout_width="match_parent"
+				android:onClick="onYeahButtonClick" android:layout_height="0dp"
+				android:layout_weight="0.14"></Button>
 
-	<Button android:id="@+id/createCourseButton" android:text="Create Course"
-		android:layout_width="match_parent" android:onClick="onCreateCourseButtonClick"
-		android:layout_height="0dp" android:layout_weight="0.14"></Button>
-		
-	<Button android:id="@+id/fullTestButton" android:text="Full Entity Testing"
-		android:layout_width="match_parent" android:onClick="onFullTestButtonClick"
-		android:layout_height="0dp" android:layout_weight="0.14"></Button>
+			<Button android:id="@+id/getCurrentScheduleButton"
+				android:text="GET /api/schedule/current" android:layout_width="match_parent"
+				android:onClick="onCurSchedButtonClick" android:layout_height="0dp"
+				android:layout_weight="0.14"></Button>
 
-	<LinearLayout android:layout_width="match_parent"
-		android:id="@+id/connSettingsLayout" android:layout_height="0dp"
-		android:layout_weight="0.14">
-		<Button android:id="@+id/changeServerButton" android:text="Change Server"
-			android:layout_height="wrap_content" android:onClick="onChangeServerButtonClick"
-			android:layout_width="0dp" android:layout_weight="1"></Button>
-		<Button android:id="@+id/loginButton" android:text="Log In"
-			android:layout_height="wrap_content" android:onClick="onLoginButtonClick"
-			android:layout_width="0dp" android:layout_weight="1"></Button>
+			<Button android:id="@+id/createCourseButton" android:text="Create Course"
+				android:layout_width="match_parent" android:onClick="onCreateCourseButtonClick"
+				android:layout_height="0dp" android:layout_weight="0.14"></Button>
+
+			<Button android:id="@+id/fullTestButton" android:text="Full Entity Testing"
+				android:layout_width="match_parent" android:onClick="onFullTestButtonClick"
+				android:layout_height="0dp" android:layout_weight="0.14"></Button>
+		</LinearLayout>
+		<LinearLayout android:id="@+id/connSettingsLayout"
+			android:layout_height="wrap_content" android:layout_width="fill_parent"
+			android:background="@android:drawable/bottom_bar" android:gravity="center_vertical">
+			<Button android:layout_height="wrap_content" android:text="Change Server"
+				android:layout_weight="1" android:onClick="onChangeServerButtonClick"
+				android:id="@+id/changeServerButton" android:layout_width="0dp"></Button>
+			<Button android:layout_height="wrap_content" android:text="Log In"
+				android:layout_weight="1" android:onClick="onLoginButtonClick"
+				android:id="@+id/loginButton" android:layout_width="0dp"></Button>
+		</LinearLayout>
 	</LinearLayout>
-</LinearLayout>
+</ScrollView>

@@ -27,6 +27,14 @@ public class UserProfile extends DatastoreEntity {
 		if (jSched != null)
 			currentSchedule = new Schedule(jSched);
 	}
+	
+	public University getUniversity() {
+		return university;
+	}
+	
+	public String getNickname() {
+		return nickname;
+	}
 
 	public String getAPIPath() {
 		return "/api/profile";

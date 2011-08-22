@@ -16,6 +16,7 @@ import com.rdft.foreveralone.glue.models.Course;
 import com.rdft.foreveralone.glue.models.DatastoreEntity;
 import com.rdft.foreveralone.glue.models.Schedule;
 import com.rdft.foreveralone.glue.models.Section;
+import com.rdft.foreveralone.glue.models.UserProfile;
 
 public class GlueLayerDebugActivity extends Activity implements ILoginReceiver {
 	String TAG = "GlueDebug";
@@ -138,9 +139,11 @@ public class GlueLayerDebugActivity extends Activity implements ILoginReceiver {
 			return;
 		}
 
-		Course course = new Course();
-		DatastoreEntity entity = course;
 		try {
+			UserProfile profile = comm.getProfile();
+			Course course = new Course();
+			course.university = profile.getUniversity();
+			DatastoreEntity entity = course;
 			comm.update(entity);
 			DebugConfig.logInfo(TAG, "Entity key after update: " + entity.getEntityKey());
 		} catch (JSONException e) {

@@ -26,6 +26,10 @@ public class DebugConfig {
 	}
 	
 	public static void logWarning(String tag, String message) {
-		Log.w(tag, message);
+		Log.w(TAG + "-" + tag, message);
+	}
+	
+	public static void logDebug(String tag, String message) {
+		Log.d(TAG + "-" + tag, message);
 	}
 }
