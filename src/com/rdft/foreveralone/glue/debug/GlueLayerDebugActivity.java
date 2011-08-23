@@ -16,6 +16,7 @@ import com.rdft.foreveralone.glue.models.Course;
 import com.rdft.foreveralone.glue.models.DatastoreEntity;
 import com.rdft.foreveralone.glue.models.Schedule;
 import com.rdft.foreveralone.glue.models.Section;
+import com.rdft.foreveralone.glue.models.University;
 import com.rdft.foreveralone.glue.models.UserProfile;
 
 public class GlueLayerDebugActivity extends Activity implements ILoginReceiver {
@@ -146,6 +147,23 @@ public class GlueLayerDebugActivity extends Activity implements ILoginReceiver {
 			DatastoreEntity entity = course;
 			comm.update(entity);
 			DebugConfig.logInfo(TAG, "Entity key after update: " + entity.getEntityKey());
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void onUniSearchTestButtonClick(View v) {
+		try {
+			University[] results = comm.searchUniversities("hello");
+			if (results == null) {
+				DebugConfig.logError(TAG, "results are null!");
+				return;
+			}
+			
+			DebugConfig.logInfo(TAG, "Got results`!");
+			for (University uni : results) {
+				DebugConfig.logInfo(TAG, uni.name);
+			}
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}

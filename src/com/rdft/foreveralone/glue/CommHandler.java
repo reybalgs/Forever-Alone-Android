@@ -1,5 +1,10 @@
 package com.rdft.foreveralone.glue;
 
+import java.util.LinkedList;
+import java.util.List;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -7,6 +12,7 @@ import org.json.JSONObject;
 import com.rdft.foreveralone.glue.debug.DebugConfig;
 import com.rdft.foreveralone.glue.models.Course;
 import com.rdft.foreveralone.glue.models.DatastoreEntity;
+import com.rdft.foreveralone.glue.models.Friend;
 import com.rdft.foreveralone.glue.models.Schedule;
 import com.rdft.foreveralone.glue.models.Section;
 import com.rdft.foreveralone.glue.models.University;
@@ -79,6 +85,22 @@ public class CommHandler {
 
 		return universities;
 	}
+	
+	public University[] searchUniversities(String query) throws JSONException {
+		List<NameValuePair> args = new LinkedList<NameValuePair>();
+		args.add(new BasicNameValuePair("query", query));
+		String response = http.getWithArgs(DebugConfig.getURL("/api/university/search"), args);
+		JSONArray jResponse = new JSONArray(response);
+		
+		int numResults = jResponse.length();
+		University[] results = new University[numResults];
+		
+		for (int i = 0; i < jResponse.length(); i++) {
+			results[i] = new University(jResponse.getJSONObject(i));
+		}
+		
+		return results;
+	}
 
 	public UserProfile getProfile() throws JSONException {
 		JSONObject jObj = http.getObject(DebugConfig.getURL("/api/profile"));
@@ -90,6 +112,32 @@ public class CommHandler {
 		UserProfile profile;
 		profile = new UserProfile(jObj);
 		return profile;
+	}
+	
+	public Friend[] getFriends() throws JSONException {
+		JSONArray jFriends = http.getArray(DebugConfig.getURL("/api/friend"));
+		JSONObject jCommon = http.getObject(DebugConfig.getURL("/api/friend/samecourse"));
+		
+		// Create Friend objects 
+		// (that sounds so wrong)
+		int numFriends = jFriends.length();
+		Friend[] friends = new Friend[numFriends];
+		for (int i = 0; i < numFriends; i++) {
+			friends[i] = new Friend(jFriends.getJSONObject(i));
+		}
+		
+		// Fill in the commonCourses property of the Friends 
+		for (Friend friend : friends) {
+			JSONArray jSections = jCommon.getJSONArray(friend.getEntityKey());
+			Section[] sections = new Section[jSections.length()];
+			for (int i = 0; i < jSections.length(); i++) {
+				sections[i] = new Section(jSections.getJSONObject(i));
+				
+			}
+			friend.commonSections = sections;
+		}
+		
+		return friends;
 	}
 
 	public void createDefaultProfile() {

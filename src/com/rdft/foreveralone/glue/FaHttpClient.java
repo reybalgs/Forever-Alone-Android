@@ -12,6 +12,7 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
+import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
@@ -122,5 +123,37 @@ public class FaHttpClient extends DefaultHttpClient {
 			e.printStackTrace();
 		}
 		return jsonArray;
+	}
+	
+	public String getWithArgs(String url, List<NameValuePair> args) {
+		try {
+			String paramString = URLEncodedUtils.format(args, "utf-8");
+			url += "?" + paramString;
+			
+			DebugConfig.logInfo(TAG, "GETting (with args) " + url);
+			HttpGet request = new HttpGet(url);
+			long start, end;
+			start = System.currentTimeMillis();
+			
+			HttpResponse response = this.execute(request);
+
+			end = System.currentTimeMillis();
+			DebugConfig
+					.logInfo(TAG, "HTTP GET took [" + (end - start) + "] ms");
+
+			HttpEntity resEntity = response.getEntity();
+			String entityKey = EntityUtils.toString(resEntity);
+			if (resEntity != null) {
+				DebugConfig.logInfo(TAG, "Server returned: "
+						+ entityKey);
+				return entityKey;
+			}
+		} catch (IOException e) {
+			DebugConfig.logError(TAG, "I/O error in HTTP GET");
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 }
