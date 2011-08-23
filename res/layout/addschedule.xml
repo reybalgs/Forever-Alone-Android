@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+  	android:layout_height="wrap_content">
+	<LinearLayout
+	  xmlns:android="http://schemas.android.com/apk/res/android"
+	  android:orientation="vertical"
+	  android:layout_width="match_parent"
+	  android:layout_height="wrap_content"
+	  android:layout_marginLeft="4sp"
+	  android:layout_marginRight="4sp">
+	    <TextView 
+	    	android:layout_width="wrap_content" 
+	    	android:id="@+id/textView1" 
+	    	android:layout_gravity="center"
+	    	android:layout_height="wrap_content" 
+	    	android:textAppearance="?android:attr/textAppearanceLarge" 
+	    	android:text="Add a Schedule">
+	    </TextView>
+	    <TextView 
+	    	android:text="Adding a schedule for a course has never been easier!" 
+	    	android:id="@+id/textView4" 
+	    	android:layout_width="wrap_content" 
+	    	android:layout_height="wrap_content">
+	    </TextView>
+	    <TextView 
+	    	android:layout_width="wrap_content" 
+	    	android:id="@+id/textView2" 
+	    	android:layout_height="wrap_content" 
+	    	android:textAppearance="?android:attr/textAppearanceMedium" 
+	    	android:text="Days of the week this course is on:">
+	    </TextView>
+	    <RadioGroup 
+	    	android:id="@+id/radioGroup1" 
+	    	android:layout_width="wrap_content" 
+	    	android:layout_height="wrap_content">
+	        <RadioButton 
+	        	android:text="Monday" 
+	        	android:layout_width="wrap_content" 
+	        	android:layout_height="wrap_content" 
+	        	android:id="@+id/radio0" 
+	        	android:checked="true">
+	        </RadioButton>
+	        <RadioButton 
+	        	android:text="Tuesday" 
+	        	android:layout_width="wrap_content" 
+	        	android:layout_height="wrap_content" 
+	        	android:id="@+id/radio1">
+	        </RadioButton>
+	        <RadioButton 
+	        	android:text="Wednesday" 
+	        	android:layout_width="wrap_content" 
+	        	android:layout_height="wrap_content" 
+	        	android:id="@+id/radio2">
+	        </RadioButton>
+	        <RadioButton 
+	        	android:text="Thursday" 
+	        	android:layout_width="wrap_content" 
+	        	android:layout_height="wrap_content" 
+	        	android:id="@+id/radio3">
+	        </RadioButton><RadioButton 
+	        	android:text="Friday" 
+	        	android:layout_width="wrap_content" 
+	        	android:layout_height="wrap_content" 
+	        	android:id="@+id/radio4">
+	        </RadioButton><RadioButton 
+	        	android:text="Saturday" 
+	        	android:layout_width="wrap_content" 
+	        	android:layout_height="wrap_content" 
+	        	android:id="@+id/radio5">
+	        </RadioButton>
+	    </RadioGroup>
+	    <Button 
+	    	android:text="Set time for this schedule" 
+	    	android:id="@+id/settime" 
+	    	android:layout_width="wrap_content" 
+	    	android:layout_gravity="center"
+	    	android:layout_height="wrap_content">
+	    </Button>
+	    <TextView 
+	    	android:text="There is currently no time!" 
+	    	android:id="@+id/timeprev" 
+	    	android:layout_width="wrap_content" 
+	    	android:layout_height="wrap_content">
+	    </TextView>
+	    <Button 
+	    	android:text="Done!" 
+	    	android:id="@+id/scheddone" 
+	    	android:layout_width="wrap_content" 
+	    	android:layout_gravity="center"
+	    	android:layout_height="wrap_content">
+	    </Button>
+    </LinearLayout>
+</ScrollView>
+
