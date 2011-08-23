@@ -3,8 +3,13 @@ package com.rdft.foreveralone.glue.debug;
 import org.json.JSONException;
 
 import android.app.Activity;
+import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager.LayoutParams;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.rdft.foreveralone.R;
@@ -72,8 +77,10 @@ public class GlueLayerDebugActivity extends Activity implements ILoginReceiver {
 		}
 	}
 
+
 	public void onChangeServerButtonClick(View v) {
-		
+		Intent intent = new Intent(this, ServerAddressConfigActivity.class);
+		startActivity(intent);
 	}
 
 	public void onLoginButtonClick(View v) {

@@ -23,7 +23,7 @@
 		<activity android:name=".AddFriends"></activity>
 
 		<activity android:name=".glue.auth.AccountList"></activity>
-		<activity android:name=".glue.debug.GlueLayerDebugActivity"></activity>
+		<activity android:name=".glue.debug.ServerAddressConfigActivity"></activity>
 		<activity android:name=".AddCourse"></activity>
 		
 		<activity android:name=".Splash"></activity>
