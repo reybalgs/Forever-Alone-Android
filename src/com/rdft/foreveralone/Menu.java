@@ -6,11 +6,11 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.widget.TabHost;
 import com.rdft.foreveralone.R;
+import com.rdft.foreveralone.glue.CommHandler;
+import com.rdft.foreveralone.glue.auth.LoginTask;
 
 public class Menu extends TabActivity {
     /** Called when the activity is first created. */
-	
-	
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
