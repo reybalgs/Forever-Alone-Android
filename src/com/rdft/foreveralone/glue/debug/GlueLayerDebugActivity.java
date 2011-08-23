@@ -160,9 +160,26 @@ public class GlueLayerDebugActivity extends Activity implements ILoginReceiver {
 				return;
 			}
 			
-			DebugConfig.logInfo(TAG, "Got results`!");
+			DebugConfig.logInfo(TAG, "Got results!");
 			for (University uni : results) {
 				DebugConfig.logInfo(TAG, uni.name);
+			}
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void onProfileSearchTestButtonClick(View v) {
+		try {
+			UserProfile[] results = comm.searchProfiles("test");
+			if (results == null) {
+				DebugConfig.logError(TAG, "results are null!");
+				return;
+			}
+			
+			DebugConfig.logInfo(TAG, "Got results!");
+			for (UserProfile profile : results) {
+				DebugConfig.logInfo(TAG, profile.email);
 			}
 		} catch (JSONException e) {
 			e.printStackTrace();

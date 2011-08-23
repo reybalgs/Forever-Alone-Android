@@ -95,7 +95,7 @@ public class CommHandler {
 		int numResults = jResponse.length();
 		University[] results = new University[numResults];
 		
-		for (int i = 0; i < jResponse.length(); i++) {
+		for (int i = 0; i < numResults; i++) {
 			results[i] = new University(jResponse.getJSONObject(i));
 		}
 		
@@ -112,6 +112,22 @@ public class CommHandler {
 		UserProfile profile;
 		profile = new UserProfile(jObj);
 		return profile;
+	}
+	
+	public UserProfile[] searchProfiles(String query) throws JSONException {
+		List<NameValuePair> args = new LinkedList<NameValuePair>();
+		args.add(new BasicNameValuePair("query", query));
+		String response = http.getWithArgs(DebugConfig.getURL("/api/profile/search"), args);
+		JSONArray jResults = new JSONArray(response);
+		int numResults = jResults.length();
+		
+		UserProfile[] results = new UserProfile[numResults];
+		
+		for (int i = 0; i < numResults; i++) {
+			results[i] = new UserProfile(jResults.getJSONObject(i));
+		}
+		
+		return results;
 	}
 	
 	public Friend[] getFriends() throws JSONException {
