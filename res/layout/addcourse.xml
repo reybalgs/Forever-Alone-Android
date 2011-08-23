@@ -92,6 +92,15 @@
 	    </TextView>
 	    <EditText android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/editText3" android:inputType="date"></EditText>
 	    <Button 
+	    	android:text="Click to add schedule" 
+	    	android:id="@+id/addsched" 
+	    	android:layout_width="wrap_content"
+	    	android:layout_height="wrap_content"
+	    	android:ems="8"
+	    	android:layout_marginTop="36sp"
+	    	android:layout_gravity="center">
+	    </Button>
+	    <Button 
 	    	android:text="Done!" 
 	    	android:id="@+id/submitcourse" 
 	    	android:layout_width="wrap_content"
