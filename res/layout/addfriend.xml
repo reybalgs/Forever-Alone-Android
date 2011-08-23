@@ -1,17 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
   android:orientation="vertical"
   android:layout_width="match_parent"
   android:layout_height="match_parent">
-    <EditText 
-    	android:id="@+id/account_box" 
-    	android:layout_width="fill_parent" 
-    	android:layout_height="wrap_content" 
-    	android:layout_below="@+id/googleaccounttext" 
-    	android:layout_alignLeft="@+id/googleaccounttext" >
-        <requestFocus></requestFocus>
-    </EditText>
     <TextView 
     	android:layout_height="wrap_content" 
     	android:layout_width="wrap_content" 
@@ -22,19 +14,41 @@
     	android:layout_alignLeft="@+id/googleaccounttext">
     </TextView>
     <TextView 
-    	android:layout_height="wrap_content" 
+    	android:text="The point of Forever Alone is to be with your friends. If you don't have any friends, why don't you add some?" 
+    	android:id="@+id/textView2" 
     	android:layout_width="wrap_content" 
-    	android:text="Enter the Google account of your friend(s):" 
-    	android:id="@+id/googleaccounttext" 
-    	android:layout_below="@+id/textView1" 
-    	android:layout_alignParentLeft="true">
+    	android:layout_height="wrap_content">
+	</TextView>
+    <TextView 
+    	android:layout_width="wrap_content" 
+    	android:id="@+id/textView3" 
+    	android:text="Email of your friend:" 
+    	android:layout_marginTop="20sp"
+    	android:textAppearance="?android:attr/textAppearanceMedium" 
+    	android:layout_height="wrap_content">
     </TextView>
+    <TextView 
+    	android:text="It has to be a Google account (e.g. herp_derp@gmail.com)" 
+    	android:id="@+id/textView4" 
+    	android:layout_width="wrap_content" 
+    	android:layout_height="wrap_content">
+    </TextView>
+    <EditText 
+    	android:id="@+id/account_box" 
+    	android:layout_width="fill_parent" 
+    	android:layout_height="wrap_content" 
+    	android:layout_below="@+id/googleaccounttext" 
+    	android:layout_alignLeft="@+id/googleaccounttext" >
+        <requestFocus></requestFocus>
+    </EditText>
     <Button 
     	android:onClick="onClick" 
     	android:id="@+id/addfriends_searchbutton" 
     	android:layout_height="wrap_content" 
-    	android:text="Search" android:layout_width="fill_parent" 
-    	android:gravity="center" android:layout_below="@+id/account_box" 
-    	android:layout_centerHorizontal="true">
+    	android:layout_width="wrap_content"
+    	android:minEms="8"
+    	android:text="Search"
+    	android:gravity="center" 
+    	android:layout_gravity="center">
     </Button>
-</RelativeLayout>
+</LinearLayout>

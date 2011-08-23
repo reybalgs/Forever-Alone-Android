@@ -28,5 +28,11 @@
     	<item>Fedora BLU</item>
     	<item>Red Hat RED</item>
     </string-array>
+    <string name="chooseterms">Choose the number of terms:</string>
+    <string-array name="numOfTerms">
+    	<item>First Term</item>
+    	<item>Second Term</item>
+    	<item>Third Term</item>
+    </string-array>
     <string name="digiderp_details_title">Details about DIGIDERP</string>
 </resources>

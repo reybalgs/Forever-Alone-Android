@@ -1,59 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  android:orientation="vertical"
-  android:layout_width="match_parent"
-  android:layout_height="match_parent"
-  android:layout_marginLeft="10sp"
-  android:layout_marginRight="10sp">
-    <TextView 
-    	android:id="@+id/coursecodetext" 
-    	android:layout_width="wrap_content" 
-    	android:layout_height="wrap_content" 
-    	android:text="Course code" 
-    	android:layout_alignParentTop="true" 
-    	android:layout_alignParentLeft="true" 
-    	android:layout_marginLeft="10dp" 
-    	android:layout_marginTop="50dp"/>
-    <EditText 
-    	android:id="@+id/coursecodebox" 
-    	android:layout_width="fill_parent" 
-    	android:layout_height="wrap_content"
-    	android:layout_below="@+id/coursecodetext" 
-    	android:layout_alignLeft="@+id/coursecodetext" >
-        <requestFocus></requestFocus>
-    </EditText>
-    <TextView 
-    	android:id="@+id/coursedescription" 
-    	android:layout_width="wrap_content" 
-    	android:layout_height="wrap_content" 
-    	android:text="Course description"
-    	android:layout_below="@+id/coursecodebox"
-    	android:layout_alignParentLeft="true" 
-    	android:layout_marginLeft="10dp"
-    	android:layout_marginTop="16sp" />
-    <EditText 
-    	android:id="@+id/coursedescriptionbox" 
-    	android:layout_width="fill_parent" 
-    	android:layout_height="wrap_content"
-    	android:layout_below="@+id/coursedescription" 
-    	android:layout_alignLeft="@+id/coursecodetext" >
-        <requestFocus></requestFocus>
-    </EditText>
-    <Button
-    	android:id="@+id/editschedulebutton"
-    	android:text="Add a schedule"
-    	android:layout_height="wrap_content"
-     	android:layout_width="wrap_content"
-    	android:layout_below="@+id/coursedescriptionbox"
-		android:layout_centerHorizontal="true"
-    	android:onClick="onClick"/>
-    <Button
-    	android:id="@+id/addcoursebutton"
-    	android:text="Create course"
-    	android:layout_height="wrap_content"
-     	android:layout_width="wrap_content"
-    	android:layout_below="@+id/editschedulebutton"
-    	android:layout_centerHorizontal="true"
-    	android:onClick="onClick"/>
-</RelativeLayout>
+<ScrollView
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent">
+	<LinearLayout
+	  android:orientation="vertical"
+	  android:layout_width="match_parent"
+	  android:layout_height="match_parent">
+	    <TextView 
+	    	android:layout_width="wrap_content" 
+	    	android:id="@+id/textView1" 
+	    	android:text="Add a course" 
+	    	android:textAppearance="?android:attr/textAppearanceLarge" 
+	    	android:layout_height="wrap_content">
+	    </TextView>
+	    <TextView 
+	    	android:text="Adding a course is easy! Just fill out this form and it will be added!" 
+	    	android:id="@+id/textView2" 
+	    	android:layout_width="wrap_content" 
+	    	android:layout_height="wrap_content">
+	    </TextView>
+	    <TextView 
+	    	android:layout_width="wrap_content" 
+	    	android:id="@+id/textView3" 
+	    	android:text="Course Code" 
+	    	android:textAppearance="?android:attr/textAppearanceMedium" 
+	    	android:layout_height="wrap_content"
+	    	android:layout_marginTop="36sp">
+	    </TextView>
+	    <TextView 
+	    	android:text="The course code (shortened codename) for your course." 
+	    	android:id="@+id/textView8" 
+	    	android:layout_width="wrap_content" 
+	    	android:layout_height="wrap_content">
+	    </TextView>
+	    <EditText 
+	    	android:layout_width="match_parent" 
+	    	android:layout_height="wrap_content" 
+	    	android:id="@+id/editText1">
+	        <requestFocus></requestFocus>
+	    </EditText>
+	    <TextView 
+	    	android:layout_width="wrap_content" 
+	    	android:id="@+id/textView4" 
+	    	android:text="Course Description" 
+	    	android:textAppearance="?android:attr/textAppearanceMedium"
+			android:layout_height="wrap_content">
+		</TextView>
+	    <TextView 
+	    	android:text="The long name (description) of this course" 
+	    	android:id="@+id/textView9" 
+	    	android:layout_width="wrap_content" 
+	    	android:layout_height="wrap_content">
+	    </TextView>
+	    <EditText 
+	    	android:layout_width="match_parent" 
+	    	android:layout_height="wrap_content" 
+	    	android:id="@+id/editText2">
+	    </EditText>
+	    <TextView 
+	    	android:layout_width="wrap_content" 
+	    	android:id="@+id/textView5" 
+	    	android:text="Which term is this course on?" 
+	    	android:textAppearance="?android:attr/textAppearanceMedium" 
+	    	android:layout_height="wrap_content">
+	    </TextView>
+	    <TextView 
+	    	android:text="Set this, because this is important." 
+	    	android:id="@+id/termthisyear" 
+	    	android:layout_width="wrap_content" 
+	    	android:layout_height="wrap_content">
+	    </TextView>
+	    <Spinner 
+	    	android:layout_width="match_parent" 
+	    	android:id="@+id/termchooser" 
+	    	android:layout_height="wrap_content"
+	    	android:prompt="@+string/chooseterms">
+	    </Spinner>
+	    <TextView 
+	    	android:layout_width="wrap_content" 
+	    	android:id="@+id/textView7" 
+	    	android:text="Year" 
+	    	android:textAppearance="?android:attr/textAppearanceMedium" 
+	    	android:layout_height="wrap_content">
+	    </TextView>
+	    <TextView 
+	    	android:text="Enter the academic year this course is on." 
+	    	android:id="@+id/textView6" 
+	    	android:layout_width="wrap_content" 
+	    	android:layout_height="wrap_content">
+	    </TextView>
+	    <EditText android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/editText3" android:inputType="date"></EditText>
+	    <Button 
+	    	android:text="Done!" 
+	    	android:id="@+id/submitcourse" 
+	    	android:layout_width="wrap_content"
+	    	android:layout_height="wrap_content"
+	    	android:ems="8"
+	    	android:layout_marginTop="36sp"
+	    	android:layout_gravity="center">
+	    </Button>
+	    
+	</LinearLayout>
+</ScrollView>

@@ -1,6 +1,5 @@
 package com.rdft.foreveralone;
 
-import com.rdft.foreveralone.glue.models.Course;
 import com.rdft.foreveralone.glue.models.Section;
 import com.rdft.foreveralone.glue.models.University;
 
