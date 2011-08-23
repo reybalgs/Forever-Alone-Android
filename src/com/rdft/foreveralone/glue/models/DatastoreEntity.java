@@ -65,10 +65,10 @@ public class DatastoreEntity {
 		 * The entity key is the App Engine datastore's identifier for instances
 		 * of an object.
 		 * 
-		 * Don't allow the entity key to be modified if we already have one.
+		 * Take note of occasions wherein the entity key gets changed.
 		 */
-		if (this.entityKey != null) {
-			DebugConfig.logInfo(TAG, "WARNING: Replacing an existing entity key!");
+		if (this.entityKey != null && (!this.entityKey.equals(entityKey))) {
+				DebugConfig.logInfo(TAG, "WARNING: Entity key was modified!");
 		}
 		if (entityKey.equals(this.entityKey)) {
 			DebugConfig.logInfo(TAG, "Entity key is unchanged: " + entityKey);

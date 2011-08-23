@@ -3,8 +3,13 @@ package com.rdft.foreveralone.glue.debug;
 import org.json.JSONException;
 
 import android.app.Activity;
+import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager.LayoutParams;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.rdft.foreveralone.R;
@@ -16,6 +21,8 @@ import com.rdft.foreveralone.glue.models.Course;
 import com.rdft.foreveralone.glue.models.DatastoreEntity;
 import com.rdft.foreveralone.glue.models.Schedule;
 import com.rdft.foreveralone.glue.models.Section;
+import com.rdft.foreveralone.glue.models.University;
+import com.rdft.foreveralone.glue.models.UserProfile;
 
 public class GlueLayerDebugActivity extends Activity implements ILoginReceiver {
 	String TAG = "GlueDebug";
@@ -70,8 +77,10 @@ public class GlueLayerDebugActivity extends Activity implements ILoginReceiver {
 		}
 	}
 
+
 	public void onChangeServerButtonClick(View v) {
-		
+		Intent intent = new Intent(this, ServerAddressConfigActivity.class);
+		startActivity(intent);
 	}
 
 	public void onLoginButtonClick(View v) {
@@ -138,11 +147,47 @@ public class GlueLayerDebugActivity extends Activity implements ILoginReceiver {
 			return;
 		}
 
-		Course course = new Course();
-		DatastoreEntity entity = course;
 		try {
+			UserProfile profile = comm.getProfile();
+			Course course = new Course();
+			course.university = profile.getUniversity();
+			DatastoreEntity entity = course;
 			comm.update(entity);
 			DebugConfig.logInfo(TAG, "Entity key after update: " + entity.getEntityKey());
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void onUniSearchTestButtonClick(View v) {
+		try {
+			University[] results = comm.searchUniversities("hello");
+			if (results == null) {
+				DebugConfig.logError(TAG, "results are null!");
+				return;
+			}
+			
+			DebugConfig.logInfo(TAG, "Got results!");
+			for (University uni : results) {
+				DebugConfig.logInfo(TAG, uni.name);
+			}
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void onProfileSearchTestButtonClick(View v) {
+		try {
+			UserProfile[] results = comm.searchProfiles("test");
+			if (results == null) {
+				DebugConfig.logError(TAG, "results are null!");
+				return;
+			}
+			
+			DebugConfig.logInfo(TAG, "Got results!");
+			for (UserProfile profile : results) {
+				DebugConfig.logInfo(TAG, profile.email);
+			}
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
