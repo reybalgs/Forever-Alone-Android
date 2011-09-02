@@ -192,4 +192,9 @@ public class GlueLayerDebugActivity extends Activity implements ILoginReceiver {
 			e.printStackTrace();
 		}
 	}
+
+	@Override
+	public void onConnectionFailed() {
+		DebugConfig.logError(TAG, "Login failed!");		
+	}
 }

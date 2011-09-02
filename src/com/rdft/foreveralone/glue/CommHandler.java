@@ -23,9 +23,15 @@ public class CommHandler {
 	FaHttpClient http;
 
 	public CommHandler(FaHttpClient customClient) {
-		DebugConfig.logInfo(TAG,
-				"CommHandler initialized with custom HttpClient");
-		http = customClient;
+		if (customClient == null) {
+			DebugConfig
+					.logDebug(TAG,
+							"Client received by constructor is null, crashing in 3, 2, 1...");
+		} else {
+			DebugConfig.logInfo(TAG,
+					"CommHandler initialized with custom HttpClient");
+			http = customClient;
+		}
 	}
 
 	public Section[] getSections() {
@@ -85,20 +91,21 @@ public class CommHandler {
 
 		return universities;
 	}
-	
+
 	public University[] searchUniversities(String query) throws JSONException {
 		List<NameValuePair> args = new LinkedList<NameValuePair>();
 		args.add(new BasicNameValuePair("query", query));
-		String response = http.getWithArgs(DebugConfig.getURL("/api/university/search"), args);
+		String response = http.getWithArgs(
+				DebugConfig.getURL("/api/university/search"), args);
 		JSONArray jResponse = new JSONArray(response);
-		
+
 		int numResults = jResponse.length();
 		University[] results = new University[numResults];
-		
+
 		for (int i = 0; i < numResults; i++) {
 			results[i] = new University(jResponse.getJSONObject(i));
 		}
-		
+
 		return results;
 	}
 
@@ -113,46 +120,48 @@ public class CommHandler {
 		profile = new UserProfile(jObj);
 		return profile;
 	}
-	
+
 	public UserProfile[] searchProfiles(String query) throws JSONException {
 		List<NameValuePair> args = new LinkedList<NameValuePair>();
 		args.add(new BasicNameValuePair("query", query));
-		String response = http.getWithArgs(DebugConfig.getURL("/api/profile/search"), args);
+		String response = http.getWithArgs(
+				DebugConfig.getURL("/api/profile/search"), args);
 		JSONArray jResults = new JSONArray(response);
 		int numResults = jResults.length();
-		
+
 		UserProfile[] results = new UserProfile[numResults];
-		
+
 		for (int i = 0; i < numResults; i++) {
 			results[i] = new UserProfile(jResults.getJSONObject(i));
 		}
-		
+
 		return results;
 	}
-	
+
 	public Friend[] getFriends() throws JSONException {
 		JSONArray jFriends = http.getArray(DebugConfig.getURL("/api/friend"));
-		JSONObject jCommon = http.getObject(DebugConfig.getURL("/api/friend/samecourse"));
-		
-		// Create Friend objects 
+		JSONObject jCommon = http.getObject(DebugConfig
+				.getURL("/api/friend/samecourse"));
+
+		// Create Friend objects
 		// (that sounds so wrong)
 		int numFriends = jFriends.length();
 		Friend[] friends = new Friend[numFriends];
 		for (int i = 0; i < numFriends; i++) {
 			friends[i] = new Friend(jFriends.getJSONObject(i));
 		}
-		
-		// Fill in the commonCourses property of the Friends 
+
+		// Fill in the commonCourses property of the Friends
 		for (Friend friend : friends) {
 			JSONArray jSections = jCommon.getJSONArray(friend.getEntityKey());
 			Section[] sections = new Section[jSections.length()];
 			for (int i = 0; i < jSections.length(); i++) {
 				sections[i] = new Section(jSections.getJSONObject(i));
-				
+
 			}
 			friend.commonSections = sections;
 		}
-		
+
 		return friends;
 	}
 
@@ -177,17 +186,17 @@ public class CommHandler {
 		JSONObject jsonObj = thing.toJSONObject();
 		String path = thing.getAPIPath();
 		String entityKey;
-		
+
 		if (!thing.isSendable()) {
-			DebugConfig.logWarning(TAG, "Object reports that it is not ready for sending!");
+			DebugConfig.logWarning(TAG,
+					"Object reports that it is not ready for sending!");
 			DebugConfig.logWarning(TAG, "(sending anyway)");
 		}
 
 		DebugConfig.logInfo(TAG, "SENDING JSON: " + jsonObj.toString());
 
 		if (thing.getEntityKey() == null) {
-			DebugConfig.logInfo(TAG,
-							"NOTE: Object has no entity key");
+			DebugConfig.logInfo(TAG, "NOTE: Object has no entity key");
 		}
 		entityKey = http.postJSON(path, jsonObj);
 		thing.setEntityKey(entityKey);

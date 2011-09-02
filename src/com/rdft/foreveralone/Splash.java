@@ -6,7 +6,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -15,6 +14,7 @@ import com.rdft.foreveralone.glue.FaHttpClient;
 import com.rdft.foreveralone.glue.auth.LoginTask;
 import com.rdft.foreveralone.glue.auth.LoginTask.ILoginReceiver;
 import com.rdft.foreveralone.glue.debug.DebugConfig;
+import com.rdft.foreveralone.glue.debug.ServerAddressConfigActivity;
 import com.rdft.foreveralone.glue.models.UserProfile;
 
 public class Splash extends Activity implements ILoginReceiver {
@@ -80,5 +80,12 @@ public class Splash extends Activity implements ILoginReceiver {
 		protected void onPostExecute(UserProfile result) {
 			onProfileRetrieved(result, successfullyRetrieved);
 		};
+	}
+
+	@Override
+	public void onConnectionFailed() {
+		Intent intent = new Intent(this, ServerAddressConfigActivity.class);
+		this.startActivity(intent);
+		this.finish();
 	}
 }
