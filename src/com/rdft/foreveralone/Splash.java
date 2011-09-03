@@ -18,17 +18,6 @@ import com.rdft.foreveralone.glue.debug.ServerAddressConfigActivity;
 import com.rdft.foreveralone.glue.models.UserProfile;
 
 public class Splash extends Activity implements ILoginReceiver {
-	// ===========================================================
-	// Fields
-	// ==========================================================
-	private final int SPLASH_DISPLAY_LENGTH = 2500;
-	// ===========================================================
-	// "Constructors"
-	// ===========================================================
-	/** Called when the activity is first created. */
-	private int profile; // determines whether a profile is loaded
-	private Intent intention; // a private intent to invoke activities
-
 	@Override
 	public void onCreate(Bundle trololo) {
 
@@ -47,6 +36,13 @@ public class Splash extends Activity implements ILoginReceiver {
 		ProfileTask task = new ProfileTask();
 		DebugConfig.comm = new CommHandler(client);
 		task.execute(DebugConfig.comm);
+	}
+	
+	@Override
+	public void onConnectionFailed() {
+		Intent intent = new Intent(this, ServerAddressConfigActivity.class);
+		this.startActivity(intent);
+		this.finish();
 	}
 	
 	public void onProfileRetrieved(UserProfile profile, boolean success) {
@@ -80,12 +76,5 @@ public class Splash extends Activity implements ILoginReceiver {
 		protected void onPostExecute(UserProfile result) {
 			onProfileRetrieved(result, successfullyRetrieved);
 		};
-	}
-
-	@Override
-	public void onConnectionFailed() {
-		Intent intent = new Intent(this, ServerAddressConfigActivity.class);
-		this.startActivity(intent);
-		this.finish();
 	}
 }
