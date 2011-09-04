@@ -3,13 +3,9 @@ package com.rdft.foreveralone.glue.debug;
 import org.json.JSONException;
 
 import android.app.Activity;
-import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager.LayoutParams;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import com.rdft.foreveralone.R;
@@ -77,7 +73,6 @@ public class GlueLayerDebugActivity extends Activity implements ILoginReceiver {
 		}
 	}
 
-
 	public void onChangeServerButtonClick(View v) {
 		Intent intent = new Intent(this, ServerAddressConfigActivity.class);
 		startActivity(intent);
@@ -123,7 +118,7 @@ public class GlueLayerDebugActivity extends Activity implements ILoginReceiver {
 		}
 	}
 
-	public void onCreateCourseButtonClick(View v) {
+	public void onCreateProfileButtonClick(View v) {
 		if (comm == null) {
 			Toast t = Toast.makeText(this, "Not yet logged in",
 					Toast.LENGTH_SHORT);
@@ -131,12 +126,7 @@ public class GlueLayerDebugActivity extends Activity implements ILoginReceiver {
 			return;
 		}
 
-		Course course = new Course();
-		try {
-			comm.update(course);
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
+		comm.createDefaultProfile();
 	}
 
 	public void onFullTestButtonClick(View v) {
@@ -153,12 +143,13 @@ public class GlueLayerDebugActivity extends Activity implements ILoginReceiver {
 			course.university = profile.getUniversity();
 			DatastoreEntity entity = course;
 			comm.update(entity);
-			DebugConfig.logInfo(TAG, "Entity key after update: " + entity.getEntityKey());
+			DebugConfig.logInfo(TAG,
+					"Entity key after update: " + entity.getEntityKey());
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void onUniSearchTestButtonClick(View v) {
 		try {
 			University[] results = comm.searchUniversities("hello");
@@ -166,7 +157,7 @@ public class GlueLayerDebugActivity extends Activity implements ILoginReceiver {
 				DebugConfig.logError(TAG, "results are null!");
 				return;
 			}
-			
+
 			DebugConfig.logInfo(TAG, "Got results!");
 			for (University uni : results) {
 				DebugConfig.logInfo(TAG, uni.name);
@@ -175,7 +166,7 @@ public class GlueLayerDebugActivity extends Activity implements ILoginReceiver {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void onProfileSearchTestButtonClick(View v) {
 		try {
 			UserProfile[] results = comm.searchProfiles("test");
@@ -183,7 +174,7 @@ public class GlueLayerDebugActivity extends Activity implements ILoginReceiver {
 				DebugConfig.logError(TAG, "results are null!");
 				return;
 			}
-			
+
 			DebugConfig.logInfo(TAG, "Got results!");
 			for (UserProfile profile : results) {
 				DebugConfig.logInfo(TAG, profile.email);
@@ -195,6 +186,6 @@ public class GlueLayerDebugActivity extends Activity implements ILoginReceiver {
 
 	@Override
 	public void onConnectionFailed() {
-		DebugConfig.logError(TAG, "Login failed!");		
+		DebugConfig.logError(TAG, "Login failed!");
 	}
 }

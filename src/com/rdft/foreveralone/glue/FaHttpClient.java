@@ -13,6 +13,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
 import org.apache.http.client.utils.URLEncodedUtils;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
@@ -38,14 +39,16 @@ public class FaHttpClient extends DefaultHttpClient {
 
 	public String postJSON(String url, JSONObject jObj) {
 		try {
-			DebugConfig.logInfo(TAG, "POSTing JSON to " + url);
-			HttpPost request = new HttpPost(DebugConfig.getURL(url));
+			String fullUrl = DebugConfig.getURL(url);
+			DebugConfig.logInfo(TAG, "POSTing JSON to " + fullUrl);
+			HttpPost request = new HttpPost(fullUrl);
 			long start, end;
 			start = System.currentTimeMillis();
-
-			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
-			nameValuePairs.add(new BasicNameValuePair("json", jObj.toString()));
-			request.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+			
+			// FA server expects to find the JSON in the request body
+			StringEntity entity = new StringEntity(jObj.toString());
+			request.setEntity(entity);
+			request.setHeader("Content-Type", "application/json");
 			HttpResponse response = this.execute(request);
 
 			end = System.currentTimeMillis();
@@ -57,6 +60,9 @@ public class FaHttpClient extends DefaultHttpClient {
 			if (resEntity != null) {
 				DebugConfig.logInfo(TAG, "This should be an entity key: "
 						+ entityKey);
+				
+				// This closes any resources attached and keeps the HTTP code happy
+				resEntity.consumeContent();
 				return entityKey;
 			}
 		} catch (IOException e) {
@@ -70,12 +76,13 @@ public class FaHttpClient extends DefaultHttpClient {
 
 	public void putJSON(String url, JSONObject jObj) {
 		try {
-			DebugConfig.logInfo(TAG, "PUTting JSON to " + url);
-			HttpPut request = new HttpPut(DebugConfig.getURL(url));
+			String fullUrl = DebugConfig.getURL(url);
+			DebugConfig.logInfo(TAG, "PUTting JSON to " + fullUrl);
+			HttpPut request = new HttpPut(fullUrl);
 
-			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
-			nameValuePairs.add(new BasicNameValuePair("json", jObj.toString()));
-			request.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+			StringEntity entity = new StringEntity(jObj.toString());
+			request.setEntity(entity);
+			request.setHeader("Content-Type", "application/json");
 			this.execute(request);
 		} catch (IOException e) {
 			DebugConfig.logError(TAG, "I/O error in HTTP POST");

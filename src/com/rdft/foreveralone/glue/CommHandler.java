@@ -24,9 +24,8 @@ public class CommHandler {
 
 	public CommHandler(FaHttpClient customClient) {
 		if (customClient == null) {
-			DebugConfig
-					.logDebug(TAG,
-							"Client received by constructor is null, crashing in 3, 2, 1...");
+			DebugConfig.logDebug(TAG, "Client received by "
+					+ "constructor is null, crashing in 3, 2, 1...");
 		} else {
 			DebugConfig.logInfo(TAG,
 					"CommHandler initialized with custom HttpClient");
@@ -166,7 +165,14 @@ public class CommHandler {
 	}
 
 	public void createDefaultProfile() {
-		http.post(DebugConfig.getURL("/api/profile"));
+		JSONObject jObj = new JSONObject();
+		try {
+			jObj.put("Apples", "Oranges");
+		} catch (JSONException e) {
+			e.printStackTrace();
+			return;
+		}
+		http.postJSON("/api/profile", jObj);
 	}
 
 	public Schedule getCurrentSchedule() throws JSONException {
