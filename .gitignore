@@ -1,6 +1,11 @@
+# For the generated .apk packages and compile stuff
 bin/
 gen/*
 # *.apk
 # *.dex
 # *.ap_
 # *.class
+
+# For the project stuff that Eclipse autogenerates
+.settings/
+project.properties

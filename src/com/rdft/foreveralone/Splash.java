@@ -42,7 +42,6 @@ public class Splash extends Activity implements ILoginReceiver {
 		loginTask.execute(null);
 	}
 
-	@Override
 	public void onLoginComplete(FaHttpClient client) {
 		ProfileTask task = new ProfileTask();
 		DebugConfig.comm = new CommHandler(client);
