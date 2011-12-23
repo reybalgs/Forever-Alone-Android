@@ -1,12 +1,15 @@
 package com.rdft.foreveralone.glue.auth;
 
 import java.io.IOException;
+import java.net.SocketTimeoutException;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.params.ClientPNames;
 import org.apache.http.cookie.Cookie;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.params.HttpConnectionParams;
+import org.apache.http.params.HttpParams;
 
 import android.accounts.Account;
 import android.accounts.AccountManager;
@@ -22,16 +25,17 @@ import com.rdft.foreveralone.glue.FaHttpClient;
 import com.rdft.foreveralone.glue.debug.DebugConfig;
 
 /**
- * LoginTask attempts to create a FaHttpClient which is authenticated
- * to the server as the user.
+ * LoginTask attempts to create a FaHttpClient which is authenticated to the
+ * server as the user.
  * 
  * @author lugkhast
- *
+ * 
  */
 public class LoginTask extends AsyncTask<Void, Void, FaHttpClient> {
 	Activity parent;
 	DefaultHttpClient authenticatedClient;
 	String TAG = "LoginTask";
+	boolean success;
 
 	public LoginTask(Activity activity) {
 		parent = activity;
@@ -68,7 +72,7 @@ public class LoginTask extends AsyncTask<Void, Void, FaHttpClient> {
 	}
 
 	private FaHttpClient getAuthenticatedClient(String authToken)
-			throws LoginException {
+			throws LoginException, SocketTimeoutException {
 		FaHttpClient client = new FaHttpClient();
 		HttpGet request = new HttpGet(
 				DebugConfig
@@ -79,14 +83,20 @@ public class LoginTask extends AsyncTask<Void, Void, FaHttpClient> {
 
 		try {
 			// client shouldn't follow redirects for now
-			client.getParams().setBooleanParameter(
-					ClientPNames.HANDLE_REDIRECTS, false);
+			HttpParams params = client.getParams();
+			params.setBooleanParameter(ClientPNames.HANDLE_REDIRECTS, false);
+
+			// We shouldn't take forever to log in. Give up early.
+			// Timeout given is in milliseconds.
+			int timeout = 5000;
+			HttpConnectionParams.setConnectionTimeout(params, timeout);
+			HttpConnectionParams.setSoTimeout(params, timeout);
 			response = client.execute(request);
 
 			if (response.getStatusLine().getStatusCode() != 302) {
 				/* The response should be a redirect */
 				DebugConfig.logError(TAG, "Cookie request failed!");
-				// throw new LoginException();
+				throw new LoginException();
 			}
 
 			for (Cookie cookie : client.getCookieStore().getCookies()) {
@@ -103,11 +113,16 @@ public class LoginTask extends AsyncTask<Void, Void, FaHttpClient> {
 		// Revert the setting
 		client.getParams().setBooleanParameter(ClientPNames.HANDLE_REDIRECTS,
 				true);
+
+		this.success = success;
 		if (success) {
 			return client;
 		} else {
-			DebugConfig.logError(TAG, "Authentication failed - not returning unauth'd HttpClient");
-			return null;
+			DebugConfig
+					.logWarning(TAG,
+							"Authentication failed - not returning unauth'd HttpClient");
+			throw new SocketTimeoutException(
+					"Failed to connect to server for login");
 		}
 	}
 
@@ -120,6 +135,8 @@ public class LoginTask extends AsyncTask<Void, Void, FaHttpClient> {
 			client = getAuthenticatedClient(authToken);
 		} catch (AuthenticatorException e) {
 			e.printStackTrace();
+		} catch (SocketTimeoutException e) {
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (OperationCanceledException e) {
@@ -134,10 +151,16 @@ public class LoginTask extends AsyncTask<Void, Void, FaHttpClient> {
 
 	protected void onPostExecute(FaHttpClient client) {
 		ILoginReceiver receiver = (ILoginReceiver) parent;
-		receiver.onLoginComplete(client);
+		if (success) {
+			receiver.onLoginComplete(client);
+		} else {
+			receiver.onConnectionFailed();
+		}
 	}
 
 	public interface ILoginReceiver {
+		public void onConnectionFailed();
+
 		public void onLoginComplete(FaHttpClient client);
 	}
 }

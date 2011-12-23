@@ -9,6 +9,7 @@ public class DebugConfig {
 	// public static String address = "192.168.1.114:8080"; // at BH
 	public static String address = "10.0.2.2:8080"; // For the emulator
 	public static String TAG = "ForeverAlone";
+	public static boolean inGlueDebugMode = false;
 	public static CommHandler comm;
 	
 	/* Allow the login code to assume that we're connecting to the dev appserver,

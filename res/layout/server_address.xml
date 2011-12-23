@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- This screen is for debugging purposes only and should not be used in 
+	released versions. -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:id="@+id/server_dialog_root" android:orientation="vertical"
 	android:layout_width="fill_parent" android:layout_height="fill_parent"
-	android:padding="10dp">
-	<TextView android:id="@+id/header" android:text="Change server address"
+	android:padding="10dp" android:weightSum="1">
+
+	<TextView android:id="@+id/header" android:text="App Server Address"
 		android:textAppearance="?android:attr/textAppearanceLarge"
 		android:layout_width="match_parent" android:layout_height="wrap_content"></TextView>
 
@@ -11,14 +14,19 @@
 		android:background="#ff106510" android:layout_marginLeft="6dip"
 		android:layout_marginRight="6dip" android:layout_marginTop="6dip"
 		android:layout_marginBottom="12dip" />
-		
+	
+	<TextView android:id="@+id/serverAddrInformationText"
+		android:layout_height="wrap_content"
+		android:text="Failed to connect to the server at the currently set address. Enter the correct address below."
+		android:layout_weight="0.02" android:layout_width="match_parent"></TextView>
+
 	<EditText android:id="@+id/serverAddressInputBox"
 		android:layout_width="match_parent" android:layout_height="wrap_content">
 		<requestFocus></requestFocus>
 	</EditText>
-	<LinearLayout android:layout_width="match_parent"
-		android:id="@+id/serverConfigButtonLayout" android:layout_height="wrap_content"
-		android:weightSum="1">
+	<LinearLayout android:id="@+id/serverConfigButtonLayout"
+		android:layout_height="wrap_content" android:layout_width="fill_parent"
+		android:gravity="center_vertical">
 		<Button android:text="Change" android:id="@+id/serverChangeButton"
 			android:layout_width="wrap_content" android:layout_height="wrap_content"
 			android:layout_weight="0.5" android:onClick="onChangeButtonClick"></Button>
@@ -26,5 +34,4 @@
 			android:layout_width="wrap_content" android:layout_height="wrap_content"
 			android:layout_weight="0.5" android:onClick="onCancelButtonClick"></Button>
 	</LinearLayout>
-
 </LinearLayout>
