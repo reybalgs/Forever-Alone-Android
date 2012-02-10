@@ -1,3 +1,7 @@
+## Hey! This project has been scrapped in favor of a completely new and clean project. You can find it here: <https://github.com/warmonger256/Falone-Android-ICS>. A version of FAlone-Android supporting Froyo and above is also planned.  ##
+
+### Your forks are still welcome if you feel like diving into messy code. ###
+
 Forever-alone-android is the Android client for Forever Alone, a college course and free-time matching app originally begun by lugkhast (https://github.com/lugkhast/Forever-Alone).
 
 This project contains the entire UI client of the app for the Android mobile platform.

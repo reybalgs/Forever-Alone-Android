@@ -12,7 +12,7 @@ import android.widget.Toast;
 
 import com.rdft.foreveralone.R;
 
-public class Friends extends ListActivity {
+public class FriendsView extends ListActivity {
 	Intent intention; // a reusable intent
 	
 	@Override

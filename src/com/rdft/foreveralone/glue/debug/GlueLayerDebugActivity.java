@@ -184,7 +184,6 @@ public class GlueLayerDebugActivity extends Activity implements ILoginReceiver {
 		}
 	}
 
-	@Override
 	public void onConnectionFailed() {
 		DebugConfig.logError(TAG, "Login failed!");
 	}

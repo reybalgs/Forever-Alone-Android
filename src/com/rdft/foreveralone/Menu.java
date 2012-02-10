@@ -31,7 +31,7 @@ public class Menu extends TabActivity {
         tabHost.addTab(spec);
 
         // Do the same for the other tabs
-        intent = new Intent().setClass(this, Friends.class);
+        intent = new Intent().setClass(this, FriendsView.class);
        spec = tabHost.newTabSpec("friends").setIndicator("",
                           res.getDrawable(R.drawable.ic_tab_friends))
                       .setContent(intent);

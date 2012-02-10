@@ -37,7 +37,6 @@ public class Splash extends Activity implements ILoginReceiver {
 		task.execute(DebugConfig.comm);
 	}
 
-	@Override
 	public void onConnectionFailed() {
 		Intent intent = new Intent(this, ServerAddressConfigActivity.class);
 		this.startActivity(intent);
